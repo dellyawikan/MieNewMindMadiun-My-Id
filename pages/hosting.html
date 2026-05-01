@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosting - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><h2>Mie Newmind</h2></div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item"><span class="menu-icon">▌</span> Dashboard</a>
+                <a href="domains.html" class="menu-item"><span class="menu-icon">▌</span> Domains</a>
+                <a href="dns-management.html" class="menu-item"><span class="menu-icon">▌</span> DNS Management</a>
+                <a href="hosting.html" class="menu-item active"><span class="menu-icon">▌</span> Hosting</a>
+                <a href="ssl-tls.html" class="menu-item"><span class="menu-icon">▌</span> SSL/TLS</a>
+                <a href="analytics.html" class="menu-item"><span class="menu-icon">▌</span> Analytics</a>
+                <a href="billing.html" class="menu-item"><span class="menu-icon">▌</span> Billing</a>
+                <a href="settings.html" class="menu-item"><span class="menu-icon">▌</span> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">Hosting</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>Hosting Configuration</h1>
+                    <p>Manage your hosting environment and deployment settings</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Provider</div>
+                        <div class="stat-value">Cloudflare</div>
+                        <div class="stat-subtext">Pages Hosting</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Uptime</div>
+                        <div class="stat-value">99.95%</div>
+                        <div class="stat-subtext">30-day average</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Response Time</div>
+                        <div class="stat-value">1.2s</div>
+                        <div class="stat-subtext">Global average</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Storage</div>
+                        <div class="stat-value">9.3 MB</div>
+                        <div class="stat-subtext">Used</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Hosting Details</h2></div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Project Name</div>
+                            <div class="info-value">newmindmadiun</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Deployment URL</div>
+                            <div class="info-value">newmindmadiun.pages.dev</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Build Output Directory</div>
+                            <div class="info-value">./</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Framework</div>
+                            <div class="info-value">Static HTML</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Features Enabled</h2></div>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">HTTP/2 Protocol</div>
+                                <div class="status-description">Multiplexing for better performance</div>
+                            </div>
+                            <span class="badge badge-active pulse">ENABLED</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">Brotli Compression</div>
+                                <div class="status-description">35% better compression vs gzip</div>
+                            </div>
+                            <span class="badge badge-active pulse">ENABLED</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">Edge Caching</div>
+                                <div class="status-description">Distributed edge network</div>
+                            </div>
+                            <span class="badge badge-active pulse">ENABLED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Deployment</h2></div>
+                    <div class="button-grid">
+                        <button class="btn btn-primary">Deploy Now</button>
+                        <button class="btn btn-secondary">View Deployment Log</button>
+                        <button class="btn btn-secondary">Rollback</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

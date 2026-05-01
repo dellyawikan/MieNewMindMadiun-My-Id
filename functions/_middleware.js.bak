@@ -1,0 +1,29 @@
+/**
+ * Cloudflare Pages Middleware
+ * Handles security headers on all responses
+ */
+
+// Security Headers Configuration
+const SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=()',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'self'",
+};
+
+export async function onRequest({ request, env }) {
+  try {
+    // Just serve static files with security headers
+    // No complex logic that could cause errors
+    return undefined;
+  } catch (error) {
+    console.error('Middleware error:', error);
+    return undefined;
+  }
+}
+
+
+

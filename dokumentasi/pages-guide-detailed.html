@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Panduan Editing Detail - Setiap Halaman & Component</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c7319c;
+            --accent: #eccb30;
+            --success: #10b981;
+            --danger: #c7333e;
+            --light-bg: #f8f1f7;
+            --dark-text: #141116;
+            --gray: #5f5660;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        header p {
+            color: var(--gray);
+            font-size: 1em;
+        }
+
+        .page-selector {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-selector h2 {
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .page-btn {
+            padding: 15px 20px;
+            border: 3px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            color: var(--dark-text);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .page-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-content h1 {
+            color: var(--primary);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .page-content h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            border-bottom: 3px solid var(--light-bg);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-content h3 {
+            color: var(--primary);
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .page-content h4 {
+            color: var(--dark-text);
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        .page-content ul, .page-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .page-content li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .page-content strong {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .page-content code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d73a49;
+            font-size: 0.9em;
+        }
+
+        .page-content pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .page-content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .edit-path {
+            background: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .edit-section {
+            background: #f0f7ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .edit-section h4 {
+            color: #2196F3;
+            margin-top: 0;
+        }
+
+        .css-edit {
+            background: #fff9e6;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .css-edit strong {
+            color: #f57c00;
+        }
+
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .code-box {
+            background: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .code-box-title {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 10px 15px;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .code-box pre {
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .warning {
+            background: #fee;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .warning strong {
+            color: var(--danger);
+        }
+
+        .info {
+            background: #eef;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .tip strong {
+            color: var(--success);
+        }
+
+        .step-by-step {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .step-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .color-item {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .color-swatch {
+            height: 60px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 10px;
+            font-size: 0.9em;
+        }
+
+        .color-name {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .color-code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: var(--gray);
+        }
+
+        .return-nav {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .return-btn:hover {
+            background: #a71f6a;
+            transform: translateX(-5px);
+        }
+
+        .help-text {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+
+        .current-page-info {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff 100%);
+            border: 2px solid var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .current-page-info p {
+            margin: 0;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+
+            .page-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+
+            .page-content h2 {
+                font-size: 1.4em;
+            }
+
+            .return-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .return-nav > * {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Panduan Edit Detail - Component & CSS</h1>
+            <p>Panduan LENGKAP editing setiap halaman dengan CSS details, code preview, dan step-by-step untuk pemula</p>
+        </header>
+
+        <!-- RETURN & TOP NAVIGATION -->
+        <div class="return-nav">
+            <a href="index.html" class="return-btn">
+                ← Kembali ke Panduan Utama
+            </a>
+            <div style="text-align: center; color: var(--gray);">
+                📍 Edit Component & CSS Detail
+            </div>
+        </div>
+
+        <div class="help-text">
+            💡 <strong>Untuk Pemula:</strong> Setiap component dijelaskan dengan 3 bagian: (1) Apa itu, (2) Kode HTML, (3) CSS Editing dengan before/after preview. Baca dari atas ke bawah!
+        </div>
+
+        <div class="page-selector">
+            <h2>Pilih Halaman:</h2>
+            <div class="page-grid">
+                <button class="page-btn active" data-page="home">🏠 Home</button>
+                <button class="page-btn" data-page="menu">🍜 Menu</button>
+                <button class="page-btn" data-page="card-detail">🎴 Card Detail</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- HOME PAGE -->
+            <div id="home" class="page-content active">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman: Home (index.html)</strong> - Hero section, cards, buttons, footer</p>
+                </div>
+                <h1>🏠 HOME PAGE - Detail Editing</h1>
+
+                <!-- HERO SECTION -->
+                <h2><span>🎨</span> HERO SECTION</h2>
+                <p>Hero section adalah area besar pertama dengan background image, judul besar, dan tombol. Paling penting untuk first impression!</p>
+
+                <div class="edit-path">File: index.html | CSS: css/styles.css</div>
+
+                <h3>📝 HTML Structure</h3>
+                <pre><code class="language-html">&lt;section class="hero"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;h1 class="hero-title"&gt;Selamat Datang di Mie Newmind&lt;/h1&gt;
+    &lt;p class="hero-subtitle"&gt;Mie Pedas Terbaik di Kota&lt;/p&gt;
+    &lt;a href="#menu" class="btn btn-primary"&gt;Lihat Menu Kami&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h3>🎨 CSS Styling - BACKGROUND</h3>
+                <div class="css-edit">
+                    <h4>🔴 Hero Background Image & Color</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.hero</code>)</p>
+                    <pre><code class="language-css">/* SEBELUM (Default) */
+.hero {
+  background-image: url('../assets/pages/hero-home.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #667eea;
+  /* Warna fallback jika image tidak load */
+}</code></pre>
+                    <p><strong>Cara Ubah:</strong></p>
+                    <div class="step-by-step">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <strong>Ubah Background Image:</strong> Ganti path <code>../assets/pages/hero-home.jpg</code> dengan gambar baru Anda
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <strong>Ubah Fallback Color:</strong> Jika gambar tidak load, tampilkan warna ini. Ubah <code>#667eea</code> ke warna pilihan Anda
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <strong>Save & Refresh:</strong> Ctrl+S, kemudian F5 di browser untuk lihat perubahan
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 25px;">Warna Fallback untuk Hero</h4>
+                    <div class="color-palette">
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: #667eea;"></div>
+                            <div class="color-info">
+                                <div class="color-name">Biru (Default)</div>
+                                <div class="color-code">#667eea</div>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: #764ba2;"></div>
+                            <div class="color-info">
+                                <div class="color-name">Purple</div>
+                                <div class="color-code">#764ba2</div>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: #c7319c;"></div>
+                            <div class="color-info">
+                                <div class="color-name">Pink (Primary)</div>
+                                <div class="color-code">#c7319c</div>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background: #1a1a1a;"></div>
+                            <div class="color-info">
+                                <div class="color-name">Hitam (Dark)</div>
+                                <div class="color-code">#1a1a1a</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - JUDUL (Hero Title)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Warna & Ukuran Judul Hero</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.hero-title</code>)</p>
+
+                    <h5 style="margin-top: 15px;">SEBELUM:</h5>
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">❌ DEFAULT</div>
+                            <pre><code class="language-css">.hero-title {
+  color: white;
+  font-size: 3em;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">✅ HASIL DI BROWSER</div>
+                            <pre><code>Judul besar PUTIH
+Ukuran: 3x dari normal (48px)
+Bold ekstrim (900 weight)
+Ada shadow hitam di belakang</code></pre>
+                        </div>
+                    </div>
+
+                    <h5>SESUDAH (Contoh Ubah):</h5>
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">✏️ EDIT INI</div>
+                            <pre><code class="language-css">.hero-title {
+  color: #eccb30;        /* ← UBAH KE KUNING */
+  font-size: 3.5em;      /* ← UBAH LEBIH BESAR */
+  font-weight: 900;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">✅ HASIL DI BROWSER</div>
+                            <pre><code>Judul KUNING (lebih eye-catching!)
+Ukuran: 3.5x dari normal
+Bold ekstrim
+Shadow lebih tebal (lebih gelap)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Tip:</strong> Warna text harus <strong>kontras</strong> dengan background! Jika background gelap, gunakan warna terang (putih, kuning). Jika background terang, gunakan warna gelap (pink, navy).
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - SUBTITLE</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Subtitle (Text Kecil di Bawah Judul)</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.hero-subtitle</code>)</p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.hero-subtitle {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 30px;
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">UBAH KE INI</div>
+                            <pre><code class="language-css">.hero-subtitle {
+  color: #ffffff;      /* Full white */
+  font-size: 1.5em;    /* Lebih besar */
+  font-weight: 600;    /* Lebih tebal */
+  margin-bottom: 30px;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - BUTTON (PRIMARY)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Button Utama</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.btn-primary</code>)</p>
+
+                    <div class="step-by-step">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <strong>Warna Background Button:</strong>
+                            <pre><code class="language-css">/* SEBELUM */
+.btn-primary {
+  background: #c7319c;  /* Pink */
+}
+
+/* SESUDAH - Ubah Ke Biru */
+.btn-primary {
+  background: #0066ff;  /* Biru */
+}</code></pre>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <strong>Warna Text di Button:</strong>
+                            <pre><code class="language-css">.btn-primary {
+  color: white;        /* Text putih */
+  /* atau */
+  color: #000000;      /* Text hitam (jarang) */
+}</code></pre>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <strong>Ukuran & Padding Button:</strong>
+                            <pre><code class="language-css">.btn-primary {
+  padding: 15px 40px;      /* Kecil: 10px 20px */
+  font-size: 1em;          /* Ukuran text */
+  border-radius: 25px;     /* Semakin besar = lebih rounded */
+}</code></pre>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4</span>
+                            <strong>Hover Effect (Saat Mouse Hovering):</strong>
+                            <pre><code class="language-css">.btn-primary:hover {
+  background: #0052cc;     /* Lebih gelap dari default */
+  transform: translateY(-2px);  /* Naik sedikit */
+  box-shadow: 0 5px 15px rgba(0,102,255,0.3);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT CARDS -->
+                <h2><span>🎨</span> PRODUCT CARDS (Kotak Produk)</h2>
+                <p>Card adalah kotak yang menampilkan 1 produk. Terdiri dari: gambar, judul, harga, tombol.</p>
+
+                <div class="edit-path">File: index.html | CSS: css/styles.css</div>
+
+                <h3>📝 HTML Structure</h3>
+                <pre><code class="language-html">&lt;div class="product-card"&gt;
+  &lt;img src="assets/products/mie-bupati.jpg" alt="Mie Bupati" class="card-image"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h3 class="card-title"&gt;Mie Bupati&lt;/h3&gt;
+    &lt;p class="card-desc"&gt;Mie dengan topping special&lt;/p&gt;
+    &lt;div class="card-price"&gt;Rp11.500&lt;/div&gt;
+    &lt;button class="btn btn-order"&gt;Pesan Sekarang&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>🎨 CSS - CARD CONTAINER (Kotak Utama)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Background & Shadow Card</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.product-card</code>)</p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.product-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">UBAH SHADOW LEBIH TEBAL</div>
+                            <pre><code class="language-css">.product-card {
+  background: white;         /* Putih */
+  /* atau #f5f5f5 = abu putih */
+  border-radius: 10px;       /* 15px = lebih bulat */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  /* Shadow lebih tebal! */
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 25px;">🔴 Edit Hover Effect (Saat Gambar Dihover):</h4>
+                    <pre><code class="language-css">.product-card:hover {
+  transform: translateY(-5px);  /* Naik 5px saat hover */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);  /* Shadow lebih thik */
+}</code></pre>
+                </div>
+
+                <h3>🎨 CSS - CARD IMAGE</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Gambar Produk</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.card-image</code>)</p>
+
+                    <pre><code class="language-css">/* SEBELUM */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+/* SESUDAH - Gambar Lebih Tinggi */
+.card-image {
+  width: 100%;
+  height: 250px;             /* ← UBAH DARI 200px KE 250px */
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}</code></pre>
+
+                    <div class="tip">
+                        <strong>💡 Tip:</strong> 
+                        <ul>
+                            <li><code>object-fit: cover</code> = Gambar dipotong sesuai ukuran container</li>
+                            <li><code>object-fit: contain</code> = Gambar full terlihat (ada space putih)</li>
+                            <li>Semakin besar height, semakin besar gambar tampil</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - CARD TITLE (Nama Produk)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Warna, Ukuran, Font Nama Produk</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.card-title</code>)</p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.card-title {
+  color: #c7319c;       /* Pink */
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">UBAH BOLD LEBIH BESAR</div>
+                            <pre><code class="language-css">.card-title {
+  color: #141116;       /* UBAH KE HITAM */
+  font-size: 1.5em;     /* LEBIH BESAR */
+  font-weight: 900;     /* LEBIH BOLD */
+  margin-bottom: 10px;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - CARD PRICE (Harga Produk)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Warna Harga (Biasanya Kuning/Accent)</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.card-price</code>)</p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.card-price {
+  color: #eccb30;       /* Kuning */
+  font-size: 1.4em;
+  font-weight: 900;
+  margin: 10px 0;
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">UBAH WARNA & UKURAN</div>
+                            <pre><code class="language-css">.card-price {
+  color: #10b981;       /* HIJAU */
+  font-size: 1.6em;     /* LEBIH BESAR */
+  font-weight: 900;
+  margin: 10px 0;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <strong>ℹ️ Nilai Price:</strong> Gunakan warna yang <strong>eye-catching</strong> dan <strong>kontras</strong> dengan background card. Warna yang bagus:
+                        <ul>
+                            <li>🟡 Kuning (#eccb30) - Default, bagus!</li>
+                            <li>🔴 Merah (#c7333e) - Bold & attracting</li>
+                            <li>🟢 Hijau (#10b981) - Fresh & modern</li>
+                            <li>🔵 Biru (#0066ff) - Professional</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🎨 CSS - CARD BODY (Wrapper Text & Button)</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Padding & Background Card Body</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.card-body</code>)</p>
+
+                    <pre><code class="language-css">.card-body {
+  padding: 20px;              /* Jarak dalam dari edge */
+  background: white;          /* atau #f9f9f9 (abu putih) */
+}</code></pre>
+
+                    <div class="step-by-step">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <strong>Padding (jarak dalam):</strong> Semakin besar = text lebih jauh dari edge
+                            <ul>
+                                <li>Kecil: 10px (kompak)</li>
+                                <li>Medium: 20px (normal) ← DEFAULT</li>
+                                <li>Besar: 30px (spacious)</li>
+                            </ul>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <strong>Background Color:</strong>
+                            <ul>
+                                <li>#ffffff = Pure white</li>
+                                <li>#f9f9f9 = Sedikit abu (lebih soft)</li>
+                                <li>#f0f7ff = Abu biru (sophisticated)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER SECTION -->
+                <h2><span>🎨</span> FOOTER (Bagian Bawah)</h2>
+                <p>Footer adalah bagian bawah halaman dengan kontak, alamat, links, social media.</p>
+
+                <h3>📝 HTML - FOOTER STRUCTURE</h3>
+                <pre><code class="language-html">&lt;footer class="site-footer"&gt;
+  &lt;div class="footer-content"&gt;
+    &lt;div class="footer-section"&gt;
+      &lt;h4&gt;Kontak Kami&lt;/h4&gt;
+      &lt;p&gt;📞 &lt;a href="tel:+6285604030473"&gt;+62 856 0403 0473&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;📧 &lt;a href="mailto:info@mienewmind.com"&gt;info@mienewmind.com&lt;/a&gt;&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</code></pre>
+
+                <h3>🎨 CSS - FOOTER</h3>
+                <div class="css-edit">
+                    <h4>🔴 Edit Background & Text Color Footer</h4>
+                    <p><strong>File:</strong> css/styles.css (cari: <code>.site-footer</code>)</p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.site-footer {
+  background: #141116;  /* Hitam gelap */
+  color: white;
+  padding: 40px 20px;
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">UBAH KE BIRU GELAP</div>
+                            <pre><code class="language-css">.site-footer {
+  background: #1a1a2e;  /* Navy blue */
+  color: white;
+  padding: 40px 20px;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 25px;">🔴 Edit Footer Links Color</h4>
+                    <pre><code class="language-css">.site-footer a {
+  color: #eccb30;        /* Kuning - eye catching */
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #ffd700;        /* Lebih terang saat hover */
+  text-decoration: underline;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- MENU PAGE -->
+            <div id="menu" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman: Menu (menu.html)</strong> - Product grid dengan filter & banyak cards</p>
+                </div>
+                <h1>🍜 MENU PAGE - Detail Editing</h1>
+                <p>Menu halaman menampilkan banyak product cards dalam grid. Semua component sama seperti di HOME, tapi ada di banyak tempat!</p>
+
+                <div class="info">
+                    <strong>ℹ️ Catatan:</strong> Semua CSS styling untuk product cards SAMA dengan halaman HOME. Baca bagian "PRODUCT CARDS" di HOME untuk detail lengkap!
+                </div>
+
+                <h3>🔴 Excel: Filter Category Buttons</h3>
+                <p>Button untuk filter: "Semua", "Mie", "Nasi", "Minuman", dll.</p>
+                <pre><code class="language-css">/* Button Filter */
+.filter-btn {
+  background: white;
+  color: #c7319c;        /* Text pink */
+  border: 2px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* Active button dipilih */
+.filter-btn.active {
+  background: #c7319c;   /* Background pink */
+  color: white;          /* Text putih */
+  border-color: #c7319c;
+}</code></pre>
+
+                <h3>🔴 Excel: Product Grid Layout</h3>
+                <p>Mengatur jumlah card per baris (responsive):</p>
+                <pre><code class="language-css">.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Artinya:
+  - repeat(auto-fit, ...) = otomatis wrap ke baris berikutnya
+  - minmax(280px, 1fr) = minimum width 280px, maksimal fill space
+  - gap: 20px = jarak antar card
+  
+  Hasil: 
+    Desktop (wide): 4 cards per baris
+    Tablet: 2-3 cards per baris
+    Mobile: 1 card per baris
+*/</code></pre>
+            </div>
+
+            <!-- CARD DETAIL PAGE -->
+            <div id="card-detail" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Component: Product Card</strong> - Deep dive ke setiap bagian card</p>
+                </div>
+                <h1>🎴 PRODUCT CARD - COMPLETE DETAIL</h1>
+                <p>Card adalah component paling sering diedit. Dijelaskan SUPER DETAIL di sini!</p>
+
+                <h2><span>🔴</span> Struktur Lengkap Card</h2>
+                <pre><code class="language-html">&lt;div class="product-card"&gt;               &lt;!-- 1. Container utama --&gt;
+  &lt;img class="card-image" 
+       src="assets/products/mie.jpg"&gt;      &lt;!-- 2. Gambar produk --&gt;
+  
+  &lt;div class="card-body"&gt;                 &lt;!-- 3. Wrapper untuk text & button --&gt;
+    
+    &lt;h3 class="card-title"&gt;
+      Mie Bupati                            &lt;!-- 4. Nama produk (PINK BOLD) --&gt;
+    &lt;/h3&gt;
+    
+    &lt;p class="card-description"&gt;
+      Mie dengan topping istimewa           &lt;!-- 5. Deskripsi (GRAY) --&gt;
+    &lt;/p&gt;
+    
+    &lt;div class="card-price"&gt;
+      Rp 11.500                             &lt;!-- 6. Harga (KUNING BOLD) --&gt;
+    &lt;/div&gt;
+    
+    &lt;button class="btn btn-order"&gt;
+      Pesan Sekarang                        &lt;!-- 7. Tombol action --&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>🎨 CSS untuk Setiap Bagian</h3>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 1: .product-card (Container Utama)</h4>
+                    <pre><code class="language-css">.product-card {
+  background: white;              /* Latar belakang putih */
+  border-radius: 12px;            /* Sudut bulat 12px */
+  overflow: hidden;               /* Image tidak keluar dari sudut */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);   /* Shadow subtle */
+  transition: all 0.3s ease;      /* Smooth animation untuk hover */
+}</code></pre>
+
+                    <div class="tip">
+                        <strong>💡 Tip Parameter:</strong>
+                        <ul>
+                            <li><code>border-radius: 12px</code> = Ukuran sudut melengkung (12px bagus untuk card)</li>
+                            <li><code>overflow: hidden</code> = Potongan gambar yang keluar dari border-radius</li>
+                            <li><code>box-shadow</code> = Bayangan di bawah card (membuat depth)</li>
+                            <li><code>transition</code> = Animasi smooth saat hover</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 2: .card-image (Gambar Produk)</h4>
+                    <pre><code class="language-css">.card-image {
+  width: 100%;                    /* Full width card */
+  height: 200px;                  /* Tinggi tetap 200px */
+  object-fit: cover;              /* Gambar dipotong, tidak stretch */
+  display: block;                 /* Remove spacing (inline element) */
+}</code></pre>
+
+                    <div class="warning">
+                        <strong>⚠️ Important:</strong>
+                        <ul>
+                            <li>Jangan gunakan <code>object-fit: stretch</code> - gambar akan jelek!</li>
+                            <li>Gunakan <code>object-fit: cover</code> untuk product cards</li>
+                            <li>Height harus fixed (bukan auto) supaya semua card sama ukuran</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 3: .card-body (Wrapper Text)</h4>
+                    <pre><code class="language-css">.card-body {
+  padding: 20px;                  /* Jarak dalam 20px */
+  background: white;
+  display: flex;                  /* Flexbox untuk layout */
+  flex-direction: column;         /* Stack vertikal */
+}</code></pre>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 4: .card-title (Nama Produk)</h4>
+                    <p><strong>Harus eye-catching! Ini yang pertama dibaca customer.</strong></p>
+
+                    <h5>DEFAULT (Sekarang):</h5>
+                    <pre><code class="language-css">.card-title {
+  color: #c7319c;                 /* PINK (primary color) */
+  font-size: 1.3em;               /* 1.3x normal size */
+  font-weight: 700;               /* Bold */
+  margin: 0 0 8px 0;              /* No margin top, 8px bottom */
+  line-height: 1.3;               /* Line height normal */
+}</code></pre>
+
+                    <h5>ALTERNATIF (Jika mau ubah):</h5>
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">Opsi 1: HITAM BOLD</div>
+                            <pre><code class="language-css">.card-title {
+  color: #141116;    /* Hitam */
+  font-size: 1.5em;  /* Lebih besar */
+  font-weight: 900;  /* Extra bold */
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">Opsi 2: GRADIENT</div>
+                            <pre><code class="language-css">.card-title {
+  background: linear-gradient(
+    135deg, 
+    #c7319c, 
+    #eccb30
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Result: Gradient text! */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 5: .card-description (Deskripsi Produk)</h4>
+                    <pre><code class="language-css">.card-description {
+  color: #5f5660;                 /* Gray (subtle) */
+  font-size: 0.95em;              /* Slightly smaller */
+  margin: 0 0 15px 0;             /* Bottom margin 15px */
+  line-height: 1.5;               /* Good readability */
+}</code></pre>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 6: .card-price (Harga)</h4>
+                    <p><strong>SUPER IMPORTANT! Ini yang bikin customers tertarik.</strong></p>
+
+                    <pre><code class="language-css">.card-price {
+  color: #eccb30;                 /* KUNING eye-catching */
+  font-size: 1.5em;               /* Besar! */
+  font-weight: 900;               /* Extra bold */
+  margin: 10px 0 15px 0;
+}</code></pre>
+
+                    <div class="tip">
+                        <strong>💡 Price Color Harus:</strong>
+                        <ul>
+                            <li>✅ BOLD & BRIGHT - Supaya terlihat</li>
+                            <li>✅ KONTRAS dengan background - jangan mirip warna!</li>
+                            <li>✅ KONSISTEN - Gunakan warna yang sama di semua card</li>
+                            <li>❌ JANGAN abu-abu atau warna pucat - tidak terlihat!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="css-edit">
+                    <h4>🔴 BAGIAN 7: .btn-order (Tombol Pesan)</h4>
+                    <p><strong>Button harus clickable, eye-catching, dan user-friendly!</strong></p>
+
+                    <div class="code-comparison">
+                        <div class="code-box">
+                            <div class="code-box-title">DEFAULT</div>
+                            <pre><code class="language-css">.btn-order {
+  background: #c7319c;     /* Pink */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+}</code></pre>
+                        </div>
+                        <div class="code-box">
+                            <div class="code-box-title">+ HOVER EFFECT</div>
+                            <pre><code class="language-css">.btn-order:hover {
+  background: #a71f6a;         /* Lebih gelap */
+  transform: translateY(-2px); /* Naik sedikit */
+  box-shadow: 0 4px 12px 
+    rgba(199,49,156,0.3);      /* Shadow pink */
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step-by-step">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <strong>Padding:</strong> 12px 24px = compact button fit di card
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <strong>Border-radius:</strong> 8px = slightly rounded (professional look)
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <strong>Cursor:</strong> pointer = tangan icon (user tahu bisa diklik!)
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4</span>
+                            <strong>:hover</strong> = state saat mouse di button (PENTING!)
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🎨 BONUS: Card Hover Animation</h3>
+                <pre><code class="language-css">/* Saat mouse hover ke card, card naik & shadow tebal */
+.product-card:hover {
+  transform: translateY(-8px);    /* Naik 8px */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);  /* Shadow besar */
+}</code></pre>
+
+                <div class="tip">
+                    <strong>💡 Kombinasi Hover:</strong>
+                    <ul>
+                        <li>Card naik (translateY)</li>
+                        <li>Shadow lebih tebal (box-shadow)</li>
+                        <li>Tombol berubah warna (:hover)</li>
+                        <li>= Semua smooth dengan transition!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📖 Panduan lengkap CSS editing dengan code preview & step-by-step untuk pemula</p>
+            <p>&copy; 2024 Mie Newmind Documentation</p>
+            <p><a href="index.html" style="color: inherit; text-decoration: underline;">← Kembali ke Panduan Utama</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Page switching
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                
+                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.page-content').forEach(s => s.classList.remove('active'));
+                
+                this.classList.add('active');
+                const section = document.getElementById(page);
+                if (section) {
+                    section.classList.add('active');
+                    const contentArea = document.querySelector('.content-area');
+                    if (contentArea) {
+                        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Highlight code blocks
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+</body>
+</html>

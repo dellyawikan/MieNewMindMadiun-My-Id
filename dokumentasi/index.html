@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Portal Dokumentasi Mie Newmind - Lengkap & Searchable</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c7319c;
+            --accent: #eccb30;
+            --success: #10b981;
+            --danger: #c7333e;
+            --light-bg: #f8f1f7;
+            --dark-text: #141116;
+            --gray: #5f5660;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        header p {
+            color: var(--gray);
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+
+        .info-item strong {
+            color: var(--primary);
+        }
+
+        /* ===== SEARCH BOX ===== */
+        .search-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-box label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input::placeholder {
+            color: #999;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(199, 49, 156, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 43px;
+            color: #999;
+            font-size: 1.2em;
+        }
+
+        .search-stats {
+            font-size: 0.9em;
+            color: var(--gray);
+            margin-top: 10px;
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            color: var(--gray);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ===== CONTENT AREA ===== */
+        .docs-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .doc-section {
+            display: none;
+        }
+
+        .doc-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== MARKDOWN STYLING ===== */
+        .doc-section h1 {
+            color: var(--primary);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .doc-section h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            border-bottom: 3px solid var(--light-bg);
+            padding-bottom: 10px;
+        }
+
+        .doc-section h3 {
+            color: var(--primary);
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .doc-section h4 {
+            color: var(--dark-text);
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .doc-section h5 {
+            color: var(--dark-text);
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .doc-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        .doc-section ul, .doc-section ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .doc-section li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .doc-section strong {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .doc-section em {
+            font-style: italic;
+            color: var(--gray);
+        }
+
+        .doc-section code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d73a49;
+            font-size: 0.9em;
+        }
+
+        .doc-section pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .doc-section pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .doc-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+        }
+
+        .doc-section table th {
+            background: var(--light-bg);
+            color: var(--primary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .doc-section table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .doc-section table tr:hover {
+            background: #fafafa;
+        }
+
+        .doc-section blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+            margin-left: 0;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .doc-section hr {
+            border: none;
+            height: 2px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+
+        .doc-section a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .doc-section a:hover {
+            border-bottom-color: var(--primary);
+        }
+
+        /* ===== SEARCH HIGHLIGHTS - MUST BE VISIBLE ===== */
+        .search-highlight {
+            background: #ffff00 !important;
+            padding: 2px 4px !important;
+            border-radius: 3px !important;
+            font-weight: 700 !important;
+            color: #000 !important;
+            display: inline !important;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* ===== QUICK NAV BOX ===== */
+        .quick-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-nav h2 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-link-btn {
+            background: white;
+            color: var(--primary);
+            padding: 20px 25px;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 3px solid transparent;
+        }
+
+        .nav-link-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .nav-link-btn .icon {
+            font-size: 1.4em;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .docs-content {
+                padding: 20px;
+            }
+
+            .header-info {
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding: 10px;
+            }
+
+            .tab-btn {
+                font-size: 0.85em;
+                padding: 10px 15px;
+                flex-shrink: 0;
+            }
+
+            .doc-section code {
+                font-size: 0.85em;
+            }
+
+            .doc-section pre {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Portal Dokumentasi Mie Newmind</h1>
+            <p>Panduan lengkap untuk mengedit website - Setiap halaman, komponen, warna, text, SETIAP DETAIL dijelaskan detail!</p>
+            <div class="header-info">
+                <div class="info-item">
+                    <strong>📖 8</strong> Panduan Lengkap
+                </div>
+                <div class="info-item">
+                    <strong>🔍</strong> Full-Text Search
+                </div>
+                <div class="info-item">
+                    <strong>🇮🇩</strong> Bahasa Indonesia
+                </div>
+                <div class="info-item">
+                    <strong>⚡</strong> Real-Time Search
+                </div>
+            </div>
+        </header>
+
+        <!-- QUICK NAVIGATION -->
+        <div class="quick-nav">
+            <h2>🎯 Pilih Panduan Apa yang Ingin Dibaca?</h2>
+            <div class="nav-links">
+                <div class="nav-link-btn" onclick="scrollToGuide('quick-start')" style="cursor: pointer;">
+                    <span class="icon">⚡</span>
+                    Mulai Cepat (5 Menit)
+                </div>
+                <a href="pages-guide.html" class="nav-link-btn">
+                    <span class="icon">📄</span>
+                    Edit Per Halaman
+                </a>
+                <a href="pages-guide-detailed.html" class="nav-link-btn">
+                    <span class="icon">🎴</span>
+                    CSS Detail & Code Preview
+                </a>
+                <div class="nav-link-btn" onclick="scrollToGuide('design-system')" style="cursor: pointer;">
+                    <span class="icon">🎨</span>
+                    Warna & Design
+                </div>
+                <div class="nav-link-btn" onclick="scrollToGuide('css-guide')" style="cursor: pointer;">
+                    <span class="icon">🎨</span>
+                    Edit CSS
+                </div>
+                <div class="nav-link-btn" onclick="scrollToGuide('javascript-guide')" style="cursor: pointer;">
+                    <span class="icon">⚙️</span>
+                    Edit JavaScript
+                </div>
+                <div class="nav-link-btn" onclick="scrollToGuide('deployment-guide')" style="cursor: pointer;">
+                    <span class="icon">🚀</span>
+                    Upload Website
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH BOX -->
+        <div class="search-container">
+            <div class="search-box">
+                <label for="globalSearch">🔍 Cari di semua dokumentasi:</label>
+                <span class="search-icon">🔎</span>
+                <input 
+                    type="text" 
+                    id="globalSearch" 
+                    placeholder="Cari: navbar, footer, button, warna, harga, WhatsApp, hero, card, form, typography..."
+                    autocomplete="off"
+                >
+                <div class="search-stats" id="searchStats"></div>
+            </div>
+        </div>
+
+        <!-- TABS FOR GUIDES -->
+        <div class="tabs">
+            <button class="tab-btn active" data-guide="quick-start">⚡ Mulai Cepat</button>
+            <button class="tab-btn" data-guide="style-guide">🎨 Edit Component</button>
+            <button class="tab-btn" data-guide="design-system">🎨 Warna & Design</button>
+            <button class="tab-btn" data-guide="css-guide">🎨 CSS Detail</button>
+            <button class="tab-btn" data-guide="javascript-guide">⚙️ JavaScript</button>
+            <button class="tab-btn" data-guide="html-guide">📝 HTML Detail</button>
+            <button class="tab-btn" data-guide="deployment-guide">🚀 Upload</button>
+            <button class="tab-btn" data-guide="troubleshooting">🐛 Troubleshooting</button>
+        </div>
+
+        <!-- CONTENT AREA -->
+        <div class="docs-content">
+            <div id="quick-start" class="doc-section active"></div>
+            <div id="style-guide" class="doc-section"></div>
+            <div id="design-system" class="doc-section"></div>
+            <div id="css-guide" class="doc-section"></div>
+            <div id="javascript-guide" class="doc-section"></div>
+            <div id="html-guide" class="doc-section"></div>
+            <div id="deployment-guide" class="doc-section"></div>
+            <div id="troubleshooting" class="doc-section"></div>
+        </div>
+
+        <footer>
+            <p>💡 Tips: Gunakan search box untuk cari kata kunci APAPUN - navbar, footer, button, warna, harga, atau panduan apapun!</p>
+            <p>&copy; 2024 Mie Newmind Documentation Portal - Panduan Lengkap Edit Website 🍜</p>
+        </footer>
+    </div>
+
+    <script>
+        // COMPLETE Documentation Content - ALL DETAILED
+        const documentationContent = {
+            'quick-start': `# 🚀 PANDUAN CEPAT - Mulai Edit Website
+
+Langkah-langkah tercepat untuk mengubah hal-hal yang paling sering diubah.
+
+## ⚡ 5 TUGAS PALING SERING (2 Menit Setiap Tugas)
+
+### 1️⃣ UBAH WARNA PINK MENJADI WARNA LAIN (2 Menit)
+
+**File:** \`css/styles.css\`
+
+1. Buka \`css/styles.css\`
+2. Tekan \`Ctrl+F\` → Cari: \`#c7319c\` (warna pink saat ini)
+3. Ganti dengan warna baru: \`#0066ff\` (biru)
+4. Tekan \`Ctrl+S\` (Save)
+5. Refresh browser: \`F5\`
+
+**Warna-warna yang bisa digunakan:**
+- Biru: \`#0066ff\`
+- Hijau: \`#10b981\`
+- Oranye: \`#ff6600\`
+- Merah: \`#c7333e\`
+
+### 2️⃣ UBAH NOMOR WHATSAPP (2 Menit)
+
+**File:** \`index.html\` dan file .html lainnya
+
+1. Buka \`index.html\`
+2. Tekan \`Ctrl+H\` (Find and Replace)
+3. Find: \`6285604030473\` (nomor lama)
+4. Replace with: \`6281234567890\` (nomor baru Anda)
+5. Klik "Replace All"
+6. Save dan refresh
+
+### 3️⃣ UBAH TEXT WEBSITE (2 Menit)
+
+**File:** \`js/script.js\` - bagian \`const i18n = { ... }\`
+
+1. Buka \`js/script.js\`
+2. Tekan \`Ctrl+F\` → Cari text yang mau diubah
+3. Edit text di bagian \`id: { ... }\` (Bahasa Indonesia)
+4. Juga edit di bagian \`en: { ... }\` (Bahasa Inggris)
+5. Save dan refresh
+
+### 4️⃣ UBAH HARGA MENU (2 Menit)
+
+**File:** \`js/menu.js\`
+
+1. Buka \`js/menu.js\`
+2. Tekan \`Ctrl+F\` → Cari harga lama: \`Rp11.500\`
+3. Ganti dengan harga baru: \`Rp14.000\`
+4. Save dan refresh
+
+### 5️⃣ UPLOAD PERUBAHAN KE INTERNET (3 Menit)
+
+**Command:** 
+\`\`\`bash
+wrangler pages deploy . --project-name mienewmind
+\`\`\`
+
+Tunggu selesai, cek: \`https://mienewmind.pages.dev\`
+
+---
+
+## 📁 Struktur File
+
+\`\`\`
+project/
+├── index.html, menu.html, about.html, location.html, dll
+├── css/
+│   └── styles.css          ← Semua styling (warna, ukuran, layout)
+├── js/
+│   ├── script.js           ← Text & fungsi utama
+│   └── menu.js             ← Data menu produk
+└── assets/
+    ├── logo/               ← Logo
+    ├── products/           ← Foto produk
+    └── pages/              ← Foto halaman
+\`\`\`
+`,
+            'style-guide': `# 🎨 EDIT COMPONENT - Panduan Detail Setiap Element
+
+Panduan lengkap untuk mengedit SETIAP komponen website - dari navbar sampai footer.
+
+## 📍 NAVBAR (Menu Atas)
+
+### Apa itu Navbar?
+Navbar adalah menu horizontal di paling atas halaman. Ada logo dan menu links (Beranda, Menu, Tentang, Lokasi, dll).
+
+### Bagian-Bagian Navbar:
+
+#### 1. Logo Website
+**Di HTML:** \`<img src="assets/logo/logo.png" class="brand-logo">\`
+**Di CSS:** \`.brand-logo { height: 50px; }\`
+
+**Cara ubah:**
+- **Ganti logo:** Ubah path \`assets/logo/logo.png\` ke 
+- **Ubah ukuran:** Ubah \`height: 50px\` → \`height: 70px\` (lebih besar)
+
+#### 2. Menu Links (Beranda, Menu, Tentang, dll)
+**Di HTML:**
+\`\`\`html
+<nav class="main-nav">
+  <a href="index.html">Beranda</a>
+  <a href="menu.html">Menu Kami</a>
+  <a href="about.html">Tentang Kami</a>
+  <a href="location.html">Lokasi</a>
+</nav>
+\`\`\`
+
+**Cara ubah:**
+- **Ganti text:** Edit text di dalam \`<a>\`
+- **Ubah warna:** Di CSS: \`.main-nav a { color: white; }\`
+- **Ubah ukuran:** Di CSS: \`.main-nav a { font-size: 1rem; }\`
+
+#### 3. Warna Background Navbar
+**Di CSS:**
+\`\`\`css
+.site-header {
+  background: linear-gradient(135deg, #c7319c, #c93898);
+}
+\`\`\`
+
+**Cara ubah:**
+- Ganti \`#c7319c\` (warna pertama gradient)
+- Ganti \`#c93898\` (warna kedua gradient)
+
+---
+
+## 📍 HERO SECTION (Bagian Atas Halaman)
+
+### Apa itu Hero?
+Hero section adalah area besar di atas halaman dengan background image, judul besar, subtitle, dan tombol.
+
+#### 1. Background Image
+**Di HTML:** \`<div class="hero" style="background-image: url('assets/pages/hero.jpg');"></div>\`
+
+**Cara ubah:**
+- Ganti path: \`assets/pages/hero.jpg\` → path image baru
+
+#### 2. Judul Hero (Heading Besar)
+**Di HTML:** \`<h1 class="hero-title">Selamat Datang di Mie Newmind</h1>\`
+
+**Cara ubah:**
+- Edit text di dalam \`<h1>\`
+- Di CSS ubah warna: \`.hero-title { color: white; }\`
+- Di CSS ubah ukuran: \`.hero-title { font-size: 3em; }\`
+
+#### 3. Subtitle
+**Di HTML:** \`<p class="hero-subtitle">Mie Pedas Terbaik di Kota</p>\`
+
+**Cara ubah:**
+- Edit text di dalam \`<p>\`
+
+#### 4. Tombol CTA (Call To Action)
+**Di HTML:**
+\`\`\`html
+<a href="#menu" class="hero-cta-btn">Lihat Menu</a>
+\`\`\`
+
+**Di CSS:**
+\`\`\`css
+.hero-cta-btn {
+  background: var(--primary);
+  color: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+}
+
+.hero-cta-btn:hover {
+  background: #a71f6a;
+}
+\`\`\`
+
+**Cara ubah:**
+- **Text:** Edit teks di \`<a>\`
+- **Warna:** Di CSS ubah \`background\` value
+- **Ukuran:** Di CSS ubah \`padding\` value
+
+---
+
+## 📍 PRODUCT/MENU CARDS
+
+### Struktur Card:
+\`\`\`html
+<div class="product-card">
+  <img src="assets/products/mie-bupati.jpg" alt="Mie Bupati" class="card-image">
+  <div class="card-body">
+    <h3 class="card-title">Mie Bupati</h3>
+    <p class="card-desc">Mie dengan topping special</p>
+    <div class="card-price">Rp11.500</div>
+    <button class="card-btn">Pesan</button>
+  </div>
+</div>
+\`\`\`
+
+**Cara ubah card:**
+- **Gambar:** Ganti path di \`<img src="...">\`
+- **Nama:** Edit text \`<h3>\`
+- **Harga:** Edit isi \`.card-price\`
+- **Ukuran card:** Di CSS ubah width/height
+
+---
+
+## 📍 FOOTER (Bagian Bawah)
+
+### Footer Structure:
+\`\`\`html
+<footer class="site-footer">
+  <div class="footer-section">
+    <h4>Tentang Kami</h4>
+    <p>Deskripsi tentang toko...</p>
+  </div>
+  
+  <div class="footer-section">
+    <h4>Kontak</h4>
+    <p>📞 WhatsApp: <a href="https://wa.me/6285604030473">+62 856 0403 0473</a></p>
+    <p>📍 Alamat: Jalan Merdeka No. 123</p>
+  </div>
+  
+  <div class="footer-section">
+    <h4>Links Cepat</h4>
+    <a href="index.html">Beranda</a>
+    <a href="menu.html">Menu</a>
+  </div>
+</footer>
+\`\`\`
+
+**Cara ubah footer:**
+- **Text:** Edit isi tag \`<p>\`, \`<h4>\`
+- **WhatsApp:** Ganti nomor di \`https://wa.me/...\`
+- **Alamat:** Edit text alamat
+- **Warna background:** Di CSS ubah \`.site-footer { background: ... }\`
+
+---
+
+## 📍 BUTTONS (Tombol-Tombol)
+
+### Button Pink (Primary):
+\`\`\`html
+<button class="btn btn-primary">Klik Saya</button>
+\`\`\`
+
+**Di CSS:**
+\`\`\`css
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+}
+
+.btn-primary:hover {
+  background: #a71f6a;
+}
+\`\`\`
+
+**Cara ubah:**
+- **Warna:** Ubah \`background\` value
+- **Ukuran:** Ubah \`padding\` value
+- **Bentuk:** Ubah \`border-radius\` value
+
+### Button Kuning (Secondary):
+\`\`\`css
+.btn-secondary {
+  background: var(--accent);
+  color: black;
+  padding: 12px 30px;
+}
+\`\`\`
+
+---
+
+## 📍 FORMS (Formulir Isian)
+
+\`\`\`html
+<form onsubmit="handleForm(event)">
+  <input type="text" name="name" placeholder="Nama Lengkap" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <textarea name="message" placeholder="Pesan..." rows="5" required></textarea>
+  <button type="submit" class="btn btn-primary">Kirim</button>
+</form>
+\`\`\`
+
+**Di CSS:**
+\`\`\`css
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(199,49,156,0.1);
+}
+\`\`\`
+
+---
+
+## 🎨 WARNA UTAMA
+
+| Nama | Hex | Kegunaan |
+|------|-----|----------|
+| Primary Pink | \`#c7319c\` | Button, heading, link |
+| Pink Gelap | \`#c93898\` | Hover, active |
+| Accent Kuning | \`#eccb30\` | Secondary button, highlight |
+| Danger Merah | \`#c7333e\` | Alert, error |
+| Text Hitam | \`#141116\` | Body text |
+| Gray | \`#5f5660\` | Subtitle |
+
+---
+
+## 📝 TIPS EDITING
+
+✅ Selalu backup sebelum edit  
+✅ Edit satu component per waktu  
+✅ Test di browser setelah setiap perubahan  
+✅ Hard refresh: \`Ctrl+Shift+R\`  
+✅ Gunakan console (F12) untuk debug
+`,
+            'design-system': `# 🎨 SISTEM WARNA & DESIGN - Panduan Lengkap
+
+Panduan lengkap tentang warna, typography, spacing, dan layout.
+
+## 🎨 PALET WARNA UTAMA
+
+Website menggunakan sistem warna yang konsisten.
+
+### Warna Primary (Pink)
+- **Hex:** \`#c7319c\`
+- **RGB:** rgb(199, 49, 156)
+- **Dipakai:** Tombol utama, link, heading
+
+### Warna Secondary (Pink Gelap)
+- **Hex:** \`#c93898\`
+- **RGB:** rgb(201, 56, 152)
+- **Dipakai:** Hover effect, active state
+
+### Warna Accent (Kuning)
+- **Hex:** \`#eccb30\`
+- **RGB:** rgb(236, 203, 48)
+- **Dipakai:** Secondary button, badge, price tag
+
+### Warna Danger (Merah)
+- **Hex:** \`#c7333e\`
+- **RGB:** rgb(199, 51, 62)
+- **Dipakai:** Alert, warning, error
+
+### Neutral Colors
+
+| Nama | Hex | Kegunaan |
+|------|-----|----------|
+| White | \`#ffffff\` | Background |
+| Black/Dark | \`#141116\` | Text body |
+| Gray | \`#5f5660\` | Subtitle |
+| Light Gray | \`#ecd6e5\` | Border |
+
+## 📐 TYPOGRAPHY SYSTEM
+
+### Font
+\`\`\`css
+font-family: 'Poppins', 'Segoe UI', sans-serif;
+\`\`\`
+
+### Heading Sizes
+
+| Level | Size | Weight | Kegunaan |
+|-------|------|--------|----------|
+| H1 | 2.5rem | 900 | Judul halaman |
+| H2 | 2rem | 800 | Section heading |
+| H3 | 1.5rem | 700 | Subheading |
+| H4 | 1.25rem | 700 | Minor heading |
+| Body | 1rem | 400 | Paragraph |
+| Small | 0.9rem | 400 | Caption |
+
+## 🔲 SPACING SYSTEM
+
+Website menggunakan spacing based on 8px scale.
+
+| Ukuran | Pixel | Kegunaan |
+|--------|-------|----------|
+| xs | 4px | Spacing kecil |
+| sm | 8px | Spacing kecil |
+| md | 16px | Spacing medium |
+| lg | 24px | Spacing besar |
+| xl | 32px | Spacing sangat besar |
+| 2xl | 48px | Spacing ekstra |
+
+## 🎯 RESPONSIVE BREAKPOINTS
+
+\`\`\`css
+/* Default = Mobile */
+
+/* Tablet */
+@media (min-width: 768px) { ... }
+
+/* Desktop */
+@media (min-width: 1024px) { ... }
+
+/* Large Desktop */
+@media (min-width: 1440px) { ... }
+\`\`\`
+
+## 🌓 DARK MODE SUPPORT
+
+Website support dark mode dengan automatic color switching.
+
+\`\`\`css
+@media (prefers-color-scheme: dark) {
+  body { background: #1a1a1a; color: #f0f0f0; }
+}
+\`\`\`
+
+## ✨ EFFECTS & TRANSITIONS
+
+### Box Shadows
+\`\`\`css
+/* Subtle */
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+/* Medium */
+box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
+/* Strong */
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+\`\`\`
+
+### Hover Effects
+\`\`\`css
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(199,49,156,0.3);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+\`\`\`
+
+## 📱 RESPONSIVE TIPS
+
+✅ Font size responsive  
+✅ Padding/margin responsive  
+✅ Grid columns responsive  
+✅ Image responsive  
+✅ Test mobile first
+`,
+            'css-guide': `# 🎨 CSS DETAIL - Panduan Edit CSS Lengkap
+
+Panduan detail tentang struktur CSS dan cara mengubah styling.
+
+## 📂 STRUKTUR FILE CSS
+
+File \`css/styles.css\` dibagi menjadi sections:
+
+1. **ROOT & RESET** - Warna utama & default
+2. **HEADER/NAVBAR** - Menu atas
+3. **HERO SECTION** - Area atas halaman
+4. **CARDS/PRODUCTS** - Kotak produk
+5. **BUTTONS** - Tombol-tombol
+6. **FORMS** - Input fields
+7. **FOOTER** - Bagian bawah
+8. **RESPONSIVE** - Mobile/tablet/desktop
+
+## 🔧 ROOT VARIABLES (Warna-Warna)
+
+**Paling penting! Ubah di sini, semua element berubah.**
+
+\`\`\`css
+:root {
+  --primary: #c7319c;           /* Pink */
+  --primary-dark: #c93898;      /* Pink gelap */
+  --accent: #eccb30;             /* Kuning */
+  --danger: #c7333e;             /* Merah */
+  --background: #ffffff;         /* Putih */
+  --text-primary: #141116;       /* Hitam */
+  --text-secondary: #5f5660;    /* Gray */
+  --border: #ecd6e5;            /* Light border */
+}
+\`\`\`
+
+### Contoh: Ubah Pink jadi Biru
+\`\`\`css
+--primary: #0066ff;             /* Biru */
+--primary-dark: #0052cc;        /* Biru gelap */
+\`\`\`
+
+**Hasil:** Semua button, link, heading jadi biru otomatis!
+
+## 🎯 NAVBAR STYLING
+
+### Navbar Container
+\`\`\`css
+.site-header {
+  background: linear-gradient(135deg, #c7319c, #c93898);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+\`\`\`
+
+**Cara ubah:**
+- **Background gradient:** Ganti kedua warna
+- **Padding:** Ubah spacing dalam
+- **Shadow:** Ubah box-shadow value
+
+### Logo
+\`\`\`css
+.brand-logo {
+  height: 50px;
+  width: auto;
+}
+\`\`\`
+
+**Cara ubah ukuran:**
+- \`height: 50px\` → \`height: 70px\`
+
+### Navigation Links
+\`\`\`css
+.main-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.main-nav a {
+  color: white;
+  font-size: 1rem;
+  padding: 8px 12px;
+}
+
+.main-nav a:hover {
+  color: var(--accent);
+}
+\`\`\`
+
+**Cara ubah:**
+- **Gap:** Jarak antar menu
+- **Color:** Warna text
+- **Font-size:** Ukuran text
+- **Hover:** Effect saat mouse hover
+
+## 🎨 HERO SECTION
+
+### Hero Container
+\`\`\`css
+.hero {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+\`\`\`
+
+**Ubah tinggi hero:**
+- \`height: 500px\` → \`height: 600px\`
+
+### Hero Title
+\`\`\`css
+.hero-title {
+  color: white;
+  font-size: 3em;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+\`\`\`
+
+### Hero Button
+\`\`\`css
+.hero-cta-btn {
+  background: var(--primary);
+  color: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+}
+
+.hero-cta-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+}
+\`\`\`
+
+## 🎴 PRODUCT CARDS
+
+### Card Container
+\`\`\`css
+.product-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+\`\`\`
+
+### Card Image
+\`\`\`css
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+\`\`\`
+
+### Card Title & Price
+\`\`\`css
+.card-title {
+  color: var(--primary);
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.card-price {
+  color: var(--accent);
+  font-size: 1.2em;
+  font-weight: 900;
+}
+\`\`\`
+
+## 🔘 BUTTONS
+
+### Button Base
+\`\`\`css
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+\`\`\`
+
+### Button Primary
+\`\`\`css
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+\`\`\`
+
+### Button Secondary
+\`\`\`css
+.btn-secondary {
+  background: var(--accent);
+  color: black;
+}
+
+.btn-secondary:hover {
+  background: #c7b819;
+}
+\`\`\`
+
+## 📝 FORMS
+
+### Form Input
+\`\`\`css
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(199,49,156,0.1);
+}
+\`\`\`
+
+## 👣 FOOTER
+
+### Footer Main
+\`\`\`css
+.site-footer {
+  background: #141116;
+  color: white;
+  padding: 40px 20px;
+}
+\`\`\`
+
+### Footer Grid
+\`\`\`css
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3 kolom */
+  gap: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);  /* 2 kolom */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    grid-template-columns: 1fr;  /* 1 kolom */
+  }
+}
+\`\`\`
+
+## 🔍 SEARCH TIPS DI CSS FILE
+
+| Ingin ubah | Cari |
+|-----------|------|
+| Warna pink | \`--primary\` atau \`#c7319c\` |
+| Button | \`.btn\` |
+| Navbar | \`.site-header\` |
+| Hero | \`.hero\` |
+| Card | \`.product-card\` |
+| Footer | \`.site-footer\` |
+| Form | \`input, textarea\` |
+`,
+            'javascript-guide': `# ⚙️ JAVASCRIPT DETAIL - Panduan Edit JavaScript
+
+Panduan lengkap tentang JavaScript dan cara mengubah interaksi website.
+
+## 📂 FILE JAVASCRIPT
+
+Ada 2 file penting:
+1. \`js/script.js\` - Main script (text, fungsi)
+2. \`js/menu.js\` - Data menu (produk)
+
+## 📍 SCRIPT.JS - BAGIAN UTAMA
+
+### BAGIAN 1: i18n (Text Website)
+
+**Untuk:** Menyimpan teks website dalam 2 bahasa (Indonesia & English)
+
+\`\`\`javascript
+const i18n = {
+  id: {                         // Bahasa Indonesia
+    nav: {
+      home: 'Beranda',
+      menu: 'Menu Kami',
+      about: 'Tentang Kami'
+    },
+    hero: {
+      title: 'Selamat Datang',
+      subtitle: 'Mie Pedas Terbaik'
+    }
+  },
+  
+  en: {                         // Bahasa Inggris
+    nav: {
+      home: 'Home',
+      menu: 'Our Menu',
+      about: 'About Us'
+    },
+    hero: {
+      title: 'Welcome',
+      subtitle: 'The Best Spicy Noodles'
+    }
+  }
+};
+\`\`\`
+
+### Cara Ubah Text Website
+
+**Dari:**
+\`\`\`javascript
+id: {
+  hero: {
+    title: 'Selamat Datang'
+  }
+}
+\`\`\`
+
+**Jadi:**
+\`\`\`javascript
+id: {
+  hero: {
+    title: 'Nikmati Mie Terbaik'
+  }
+}
+\`\`\`
+
+**PENTING:** Ubah juga di bagian \`en:\` (English)!
+
+### BAGIAN 2: DARK MODE
+
+\`\`\`javascript
+const toggleDarkMode = () => {
+  document.body.classList.toggle('dark-mode');
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkMode);
+};
+\`\`\`
+
+### BAGIAN 3: LANGUAGE SWITCHER
+
+\`\`\`javascript
+const switchLanguage = (lang) => {
+  localStorage.setItem('lang', lang);
+  location.reload();
+};
+\`\`\`
+
+### BAGIAN 4: FORM HANDLING - WHATSAPP
+
+**Untuk:** Kirim data form ke WhatsApp
+
+\`\`\`javascript
+const handleReservationForm = (e) => {
+  e.preventDefault();
+  
+  // Ambil data
+  const name = document.querySelector('input[name="name"]').value;
+  const date = document.querySelector('input[name="date"]').value;
+  const guests = document.querySelector('input[name="guests"]').value;
+  
+  // Buat pesan
+  const message = \`
+    🍜 *RESERVASI MIE NEWMIND*
+    Nama: \${name}
+    Tanggal: \${date}
+    Jumlah Tamu: \${guests}
+  \`;
+  
+  // NOMOR WHATSAPP - UBAH DI SINI!
+  const phone = '6285604030473';  // ← GANTI!
+  
+  // Buat link WhatsApp
+  const waLink = \`https://wa.me/\${phone}?text=\${encodeURIComponent(message)}\`;
+  
+  // Buka WhatsApp
+  window.open(waLink, '_blank');
+  
+  // Kosongkan form
+  e.target.reset();
+};
+\`\`\`
+
+**Cara ubah nomor WhatsApp:**
+
+**Dari:**
+\`\`\`javascript
+const phone = '6285604030473';
+\`\`\`
+
+**Jadi:**
+\`\`\`javascript
+const phone = '6281234567890';  /* Nomor baru Anda */
+\`\`\`
+
+**Format nomor yang BENAR:**
+- Mulai dengan \`62\` ✓
+- Tanpa \`+\` di depan ✓
+- Tanpa spasi ✓
+- 11-12 digit ✓
+
+## 📍 MENU.JS - DATA MENU
+
+**File:** \`js/menu.js\`
+
+\`\`\`javascript
+const menuData = {
+  mie: [
+    {
+      id: 1,
+      name: "Mie Bupati",
+      desc: "Mie dengan topping special",
+      price: "Rp11.500",
+      img: "assets/products/noodles/mie-bupati.png"
+    },
+    {
+      id: 2,
+      name: "Mie Gubernur",
+      price: "Rp12.500",
+      ...
+    }
+  ],
+  
+  drinks: [
+    { name: "Ice Tea", price: "Rp5.000", ... }
+  ]
+};
+\`\`\`
+
+### Cara Ubah Harga
+
+**Dari:**
+\`\`\`javascript
+{ name: "Mie Bupati", price: "Rp11.500" }
+\`\`\`
+
+**Jadi:**
+\`\`\`javascript
+{ name: "Mie Bupati", price: "Rp14.000" }
+\`\`\`
+
+### Cara Tambah Menu Baru
+
+\`\`\`javascript
+mie: [
+  { ... },
+  {
+    id: 99,
+    name: "Mie Goreng Spesial",
+    price: "Rp13.500",
+    ...
+  }  // ← JANGAN LUPA KOMA!
+]
+\`\`\`
+
+## 🔍 JAVASCRIPT SYNTAX PENTING
+
+| Tanda | Nama | Fungsi |
+|------|------|--------|
+| \`//\` | Comment | Komentar satu baris |
+| \`{ }\` | Curly Braces | Object/function |
+| \`[ ]\` | Array | Daftar item |
+| \`:\` | Colon | Key-value separator |
+| \`,\` | Comma | Item separator |
+| \\\`\\\` | Backtick | Template string |
+
+### String Interpolation
+
+\`\`\`javascript
+// Backtick + \${variable}
+const name = "Budi";
+const message = \\\`Halo \${name}!\\\`;  // Halo Budi!
+\`\`\`
+
+### Object & Array
+
+\`\`\`javascript
+// Object
+const product = {
+  name: "Mie Bupati",
+  price: 11500,
+  available: true
+};
+
+// Akses
+console.log(product.name);  // Mie Bupati
+
+// Array
+const menu = ["Mie", "Nasi", "Minuman"];
+console.log(menu[0]);  // Mie
+\`\`\`
+
+---
+
+## ⚠️ COMMON MISTAKES
+
+❌ **Lupa koma di list:**
+\`\`\`javascript
+const menu = [
+  "Mie"
+  "Nasi"   // ERROR! Lupa koma
+];
+\`\`\`
+
+✅ **Benar:**
+\`\`\`javascript
+const menu = [
+  "Mie",
+  "Nasi"
+];
+\`\`\`
+
+❌ **Lupa kutip untuk string:**
+\`\`\`javascript
+const name = Budi;  // ERROR!
+\`\`\`
+
+✅ **Benar:**
+\`\`\`javascript
+const name = "Budi";
+\`\`\`
+`,
+            'html-guide': `# 📝 HTML DETAIL - Panduan Edit HTML Lengkap
+
+Panduan detail tentang struktur HTML dan cara mengubah konten.
+
+## 📂 FILE HTML WEBSITE
+
+Website terdiri dari beberapa halaman:
+
+| File | Halaman | Konten |
+|------|---------|--------|
+| \`index.html\` | Beranda | Hero, promo, featured |
+| \`menu.html\` | Menu | Daftar produk |
+| \`about.html\` | Tentang | Cerita, visi, misi |
+| \`location.html\` | Lokasi | Alamat, jam buka |
+
+## 📍 NAVBAR HTML
+
+\`\`\`html
+<header class="site-header">
+  <div class="container">
+    <img src="assets/logo/logo.png" class="brand-logo">
+    
+    <nav class="main-nav">
+      <a href="index.html">Beranda</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Tentang</a>
+      <a href="location.html">Lokasi</a>
+    </nav>
+  </div>
+</header>
+\`\`\`
+
+**Cara ubah navbar:**
+- **Ganti logo:** Path di \`<img src="...">\`
+- **Ganti text menu:** Text di \`<a>\`
+- **Tambah menu:** \`<a href="...">Nama</a>\`
+
+## 🎨 HERO HTML
+
+\`\`\`html
+<section class="hero" style="background-image: url('assets/pages/hero-home.jpg');">
+  <div class="hero-content">
+    <h1 class="hero-title">Selamat Datang</h1>
+    <p class="hero-subtitle">Mie Pedas Terbaik</p>
+    <a href="#menu" class="hero-cta-btn">Lihat Menu</a>
+  </div>
+</section>
+\`\`\`
+
+**Cara ubah hero:**
+- **Background:** Path di \`background-image: url(...)\`
+- **Title:** Text di \`<h1>\`
+- **Subtitle:** Text di \`<p>\`
+- **Button:** Text di \`<a>\`
+
+## 🎴 PRODUCT CARD HTML
+
+\`\`\`html
+<div class="product-card">
+  <img src="assets/products/mie-bupati.jpg" alt="Mie Bupati" class="card-image">
+  <div class="card-body">
+    <h3 class="card-title">Mie Bupati</h3>
+    <p class="card-desc">Mie dengan topping special</p>
+    <div class="card-price">Rp11.500</div>
+    <button class="card-btn">Pesan</button>
+  </div>
+</div>
+\`\`\`
+
+**Cara ubah card:**
+- **Gambar:** Path di \`<img src="...">\`
+- **Nama:** Text di \`<h3>\`
+- **Harga:** Text di \`.card-price\`
+
+## 📋 FOOTER HTML
+
+\`\`\`html
+<footer class="site-footer">
+  <div class="footer-section">
+    <h4>Kontak</h4>
+    <p>📞 <a href="https://wa.me/6285604030473">+62 856 0403 0473</a></p>
+    <p>📍 Jalan Merdeka No. 123</p>
+  </div>
+</footer>
+\`\`\`
+
+**Cara ubah footer:**
+- **WhatsApp:** Nomor di \`https://wa.me/...\`
+- **Alamat:** Text di \`<p>\`
+
+## 🔗 LINKS
+
+**Link ke halaman lain:**
+\`\`\`html
+<a href="menu.html">Lihat Menu</a>
+\`\`\`
+
+**Link ke section:**
+\`\`\`html
+<a href="#products">Scroll ke produk</a>
+\`\`\`
+
+**Link email:**
+\`\`\`html
+<a href="mailto:info@mienewmind.com">Email</a>
+\`\`\`
+
+**Link WhatsApp:**
+\`\`\`html
+<a href="https://wa.me/6285604030473">Chat WhatsApp</a>
+\`\`\`
+
+## 🖼️ IMAGES
+
+\`\`\`html
+<img src="assets/products/mie-bupati.jpg" 
+     alt="Mie Bupati"
+     class="card-image"
+     width="300"
+     height="200">
+\`\`\`
+
+**Cara ubah gambar:**
+- **Path:** Di \`src="..."\`
+- **Alt text:** Di \`alt="..."\` (penting untuk accessibility)
+
+## 📝 FORMS
+
+\`\`\`html
+<form onsubmit="handleForm(event)">
+  <input type="text" name="name" placeholder="Nama" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <textarea name="message" placeholder="Pesan..." rows="5" required></textarea>
+  <button type="submit" class="btn btn-primary">Kirim</button>
+</form>
+\`\`\`
+
+---
+
+## ⚠️ COMMON HTML MISTAKES
+
+❌ **Lupa closing tag:**
+\`\`\`html
+<div>
+  <p>Konten
+</div>
+\`\`\`
+
+✅ **Benar:**
+\`\`\`html
+<div>
+  <p>Konten</p>
+</div>
+\`\`\`
+
+❌ **Salah quotes:**
+\`\`\`html
+<img src='image.jpg>  <!-- ERROR -->
+\`\`\`
+
+✅ **Benar:**
+\`\`\`html
+<img src="image.jpg">
+\`\`\`
+`,
+            'deployment-guide': `# 🚀 PANDUAN UPLOAD WEBSITE
+
+Panduan lengkap cara upload website ke internet.
+
+## 🎯 APA ITU DEPLOYMENT?
+
+Deployment = Upload file website ke internet agar bisa diakses semua orang.
+
+### Tahapan:
+1. Edit file di komputer
+2. Test di browser lokal
+3. Deploy ke Cloudflare Pages
+4. Website live di internet
+
+## ✅ PRE-DEPLOYMENT CHECKLIST
+
+- [ ] File sudah disimpan (Ctrl+S)
+- [ ] Website berfungsi di browser lokal
+- [ ] Test responsive (mobile, tablet, desktop)
+- [ ] Dark mode works
+- [ ] Semua link berfungsi
+- [ ] Gambar muncul
+- [ ] Console tidak ada error merah (F12 → Console)
+- [ ] Form bisa diisi & submit
+- [ ] Content sudah update (nomor WA, harga, text)
+
+## 🔧 LANGKAH-LANGKAH DEPLOYMENT
+
+### STEP 1: Buka Terminal
+
+**Di VS Code:** Tekan \`Ctrl + \\\`\` (backtick)
+
+**Mac:** Spotlight → Terminal
+
+**Windows:** Start Menu → PowerShell
+
+### STEP 2: Navigasi ke Project
+
+\`\`\`bash
+cd /path/to/your/project
+\`\`\`
+
+### STEP 3: Install Wrangler (Jika Belum)
+
+\`\`\`bash
+npm install -g wrangler
+\`\`\`
+
+### STEP 4: Login Cloudflare
+
+\`\`\`bash
+wrangler login
+\`\`\`
+
+### STEP 5: Deploy Website
+
+\`\`\`bash
+wrangler pages deploy . --project-name mienewmind
+\`\`\`
+
+### STEP 6: Tunggu Selesai
+
+Terminal akan menunjukkan:
+\`\`\`
+✓ Deployment complete!
+✓ Your deployment is ready at:
+  https://mienewmind.pages.dev
+\`\`\`
+
+### STEP 7: Test Live
+
+1. Buka browser → https://mienewmind.pages.dev
+2. Hard refresh: \`Ctrl+Shift+R\`
+3. Test semua functionality
+
+## 🔄 UPDATE WEBSITE
+
+Jika ada perubahan:
+
+1. Edit file
+2. Save (Ctrl+S)
+3. Test lokal
+4. Deploy ulang: \`wrangler pages deploy . --project-name mienewmind\`
+5. Cek live
+
+## 🆘 TROUBLESHOOTING
+
+### Error: "Authentication failed"
+\`\`\`bash
+wrangler logout
+wrangler login
+wrangler pages deploy . --project-name mienewmind
+\`\`\`
+
+### Deploy sukses tapi website tidak terupdate
+- Hard refresh: Ctrl+Shift+R
+- Clear cache: Ctrl+Shift+Delete
+- Tunggu 1-2 menit
+
+---
+
+## ⚡ QUICK CHEATSHEET
+
+\`\`\`bash
+# Deploy
+wrangler pages deploy . --project-name mienewmind
+
+# Website live di:
+https://mienewmind.pages.dev
+\`\`\`
+`,
+            'troubleshooting': `# 🐛 TROUBLESHOOTING - Solusi Masalah Website
+
+Panduan mengatasi masalah yang sering terjadi.
+
+## ❌ MASALAH #1: WEBSITE TIDAK MUNCUL / HALAMAN KOSONG
+
+**Solusi:**
+
+1. **Hard Refresh:** \`Ctrl+Shift+R\`
+2. **Check Console:** F12 → Console → Lihat error merah
+3. **Restart Server:**
+   \`\`\`bash
+   Ctrl+C (stop)
+   python -m http.server 8000 (start lagi)
+   \`\`\`
+4. **Clean Cache:** \`Ctrl+Shift+Delete\` → Clear All
+
+## ❌ MASALAH #2: WEBSITE TIDAK ADA WARNA
+
+**Solusi:**
+
+1. **Hard Refresh:** \`Ctrl+Shift+R\`
+2. **Check CSS Path:** Di HTML: \`<link rel="stylesheet" href="css/styles.css">\`
+3. **Check File Ada:** Folder \`css\` ada? File \`styles.css\` ada?
+4. **Clear Cache:** \`Ctrl+Shift+Delete\`
+
+## ❌ MASALAH #3: TOMBOL / LINK TIDAK BERFUNGSI
+
+**Solusi:**
+
+1. **Check Console:** F12 → Console → Lihat error
+2. **Check Link Format:**
+   \`\`\`html
+   <!-- BENAR ✅ -->
+   <a href="menu.html">Menu</a>
+   
+   <!-- SALAH ❌ -->
+   <a href="">Menu</a>
+   \`\`\`
+3. **Check File Ada:** File target (.html) ada di folder project?
+4. **Check WhatsApp Format:**
+   \`\`\`html
+   <!-- BENAR ✅ -->
+   <a href="https://wa.me/6285604030473">Chat</a>
+   
+   <!-- SALAH ❌ -->
+   <a href="https://wa.me/+6285604030473">    <!-- Ada + jangan! -->
+   \`\`\`
+
+## ❌ MASALAH #4: PERUBAHAN TIDAK TERLIHAT
+
+**Solusi:**
+
+1. **Pastikan File Tersimpan:** Di VS Code ada titik di tab file? Tekan Ctrl+S
+2. **Edit File Yang Benar:** CSS → \`css/styles.css\`, Text → \`js/script.js\`
+3. **Hard Refresh:** \`Ctrl+Shift+R\`
+4. **Check Server Jalan:** Terminal ada output?
+
+## ❌ MASALAH #5: GAMBAR TIDAK MUNCUL
+
+**Solusi:**
+
+1. **Check Path:** Folder \`assets\` ada? Subfolder ada? File ada?
+2. **Check Nama File:** Case-sensitive! \`Mie-Bupati.jpg\` ≠ \`mie-bupati.jpg\`
+3. **Tidak Ada Spasi:** ❌ \`mie bupati.jpg\` → ✅ \`mie-bupati.jpg\`
+4. **Console Error:** F12 → Console → Lihat path yang error
+
+## ❌ MASALAH #6: FORM TIDAK BISA DIKIRIM
+
+**Solusi:**
+
+1. **Check Nomor WhatsApp:** \`const phone = '6285604030473'\`
+   - Mulai dengan \`62\` ✓
+   - Tanpa \`+\` ✓
+   - Tanpa spasi ✓
+   - 11-12 digit ✓
+
+2. **Check Console Error:** F12 → Console → Klik submit → Lihat error
+
+3. **Check Form HTML:**
+   \`\`\`html
+   <!-- BENAR ✅ -->
+   <form onsubmit="handleForm(event)">
+     <input type="text" name="name" required>
+     <button type="submit">Kirim</button>
+   </form>
+   
+   <!-- SALAH ❌ -->
+   <form>
+     <input type="text" placeholder="Nama">  <!-- Tidak ada name! -->
+     <button>Kirim</button>                    <!-- Tidak ada type -->
+   </form>
+   \`\`\`
+
+## ❌ MASALAH #7: WEBSITE LAMBAT
+
+**Solusi:**
+
+1. **Compress Gambar:** https://tinypng.com/
+2. **Check Console Performance:** F12 → Lighthouse → Jalankan audit
+3. **Minimize JavaScript:** Hapus \`console.log()\` yang tidak perlu
+4. **Use Lazy Loading:** Untuk gambar yang banyak
+
+## 💡 GENERAL TIPS
+
+### Tip 1: Gunakan Console (F12)
+Console adalah best friend!
+1. F12 → Console
+2. Lihat error merah
+3. Baca error message
+
+### Tip 2: Edit Satu Hal Per Waktu
+Jangan edit banyak file sekaligus!
+1. Edit 1 file
+2. Save
+3. Refresh browser
+4. Test
+5. Lanjut file berikutnya
+
+### Tip 3: Test Lokal Dulu
+✅ Edit lokal  
+✅ Test lokal (http://localhost:8000)  
+✅ Baru deploy ke live
+
+### Tip 4: Restart Browser
+Coba:
+1. Tutup browser sepenuhnya
+2. Clear cache
+3. Buka browser baru
+4. Sering kali masalah hilang! 🎉
+
+---
+
+## 📝 DEBUGGING CHECKLIST
+
+- [ ] Hard refresh: Ctrl+Shift+R
+- [ ] Clear cache: Ctrl+Shift+Delete
+- [ ] Check console (F12) untuk errors
+- [ ] File sudah disimpan: Ctrl+S
+- [ ] Edit di file yang benar
+- [ ] Try browser lain
+- [ ] Restart server
+- [ ] Undo perubahan terakhir
+
+**Ingat:** Semua masalah punya solusi! 💪
+`
+        };
+
+        // Initialize marked options
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // Load documentation content
+        function loadDocumentation() {
+            Object.keys(documentationContent).forEach(guide => {
+                const element = document.getElementById(guide);
+                if (element) {
+                    const html = marked.parse(documentationContent[guide]);
+                    element.innerHTML = html;
+                    // Highlight code blocks
+                    element.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightElement(block);
+                    });
+                }
+            });
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const guide = this.getAttribute('data-guide');
+                
+                // Remove active from all buttons and sections
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active to clicked button and corresponding section
+                this.classList.add('active');
+                const section = document.getElementById(guide);
+                if (section) {
+                    section.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // IMPROVED GLOBAL SEARCH with VISIBLE RESULTS
+        document.getElementById('globalSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const stats = document.getElementById('searchStats');
+            
+            if (query.length < 2) {
+                stats.innerHTML = '';
+                // Remove all highlights
+                document.querySelectorAll('.doc-section').forEach(section => {
+                    section.innerHTML = section.innerHTML.replace(/<span class="search-highlight">(.*?)<\/span>/g, '$1');
+                });
+                return;
+            }
+
+            let totalMatches = 0;
+            let matchedSections = [];
+
+            // Search in all sections
+            Object.keys(documentationContent).forEach(guide => {
+                const content = documentationContent[guide];
+                const matches = (content.match(new RegExp(query, 'gi')) || []).length;
+                
+                if (matches > 0) {
+                    totalMatches += matches;
+                    matchedSections.push(guide);
+                }
+            });
+
+            // Display statistics
+            if (totalMatches > 0) {
+                stats.innerHTML = `<strong style="color: var(--success);">✅ ${totalMatches} hasil ditemukan</strong> di ${matchedSections.length} panduan`;
+                
+                // Show matched sections and hide others
+                document.querySelectorAll('.doc-section').forEach(section => {
+                    const sectionId = section.id;
+                    if (matchedSections.includes(sectionId)) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+                
+                // Activate first tab with results
+                if (matchedSections.length > 0) {
+                    const firstMatchBtn = document.querySelector(`[data-guide="${matchedSections[0]}"]`);
+                    if (firstMatchBtn) {
+                        firstMatchBtn.click();
+                    }
+                }
+            } else {
+                stats.innerHTML = `<strong style="color: var(--danger);">❌ Tidak ada hasil</strong> untuk "${query}"`;
+            }
+
+            // Highlight matches in all sections
+            Object.keys(documentationContent).forEach(guide => {
+                const section = document.getElementById(guide);
+                const content = documentationContent[guide];
+                
+                // Create highlighted version
+                const regex = new RegExp(`(${query})`, 'gi');
+                const highlightedContent = content.replace(regex, '<span class="search-highlight">$1</span>');
+                
+                // Parse and update
+                const html = marked.parse(highlightedContent);
+                section.innerHTML = html;
+                
+                // Re-highlight code blocks
+                section.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            });
+        });
+
+        // Scroll to specific guide
+        function scrollToGuide(guide) {
+            // Click the corresponding tab
+            const btn = document.querySelector(`[data-guide="${guide}"]`);
+            if (btn) {
+                btn.click();
+            }
+        }
+
+        // Load documentation on page load
+        document.addEventListener('DOMContentLoaded', loadDocumentation);
+    </script>
+</body>
+</html>

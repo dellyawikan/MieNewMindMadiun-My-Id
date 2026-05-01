@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Mie Newmind Server & Domain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .invoice-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #c7319c;
+            padding-bottom: 20px;
+        }
+        
+        .company-info h1 {
+            color: #c7319c;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .company-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .invoice-meta {
+            text-align: right;
+        }
+        
+        .invoice-meta h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .invoice-meta p {
+            color: #666;
+            font-size: 13px;
+            margin: 3px 0;
+        }
+        
+        .invoice-number {
+            font-weight: bold;
+            color: #c7319c;
+        }
+        
+        .content {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #333;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        table thead {
+            background: #f9f9f9;
+            border-top: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        table th {
+            padding: 12px;
+            text-align: left;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .description {
+            color: #555;
+        }
+        
+        .quantity {
+            text-align: center;
+            color: #333;
+        }
+        
+        .unit-price {
+            text-align: right;
+            color: #333;
+        }
+        
+        .amount {
+            text-align: right;
+            color: #c7319c;
+            font-weight: 600;
+        }
+        
+        .summary {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        
+        .summary-box {
+            width: 300px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .summary-row .label {
+            color: #666;
+        }
+        
+        .summary-row .value {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .summary-row.total {
+            background: #c7319c;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .summary-row.total .label,
+        .summary-row.total .value {
+            color: white;
+        }
+        
+        .notes {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .notes h4 {
+            color: #333;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .notes p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .stamp {
+            text-align: right;
+            margin-top: 30px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .print-button {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .print-button button {
+            background: #c7319c;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .print-button button:hover {
+            background: #a82579;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .invoice-container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="print-button">
+            <button onclick="window.print()">🖨️ Print or Save as PDF</button>
+        </div>
+        
+        <div class="header">
+            <div class="company-info">
+                <h1>MIE NEWMIND</h1>
+                <p>Restaurant Website Project</p>
+                <p>Madiun, Indonesia</p>
+            </div>
+            <div class="invoice-meta">
+                <h3>INVOICE</h3>
+                <p><span class="invoice-number">#INV-2026-001</span></p>
+                <p>Date: April 4, 2026</p>
+                <p>Due: April 11, 2026</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">Services & Products</div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%">Description</th>
+                        <th style="width: 15%; text-align: center;">Quantity</th>
+                        <th style="width: 20%; text-align: right;">Unit Price</th>
+                        <th style="width: 15%; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="description">Custom Website Development<br><span style="font-size: 12px; color: #999;">Professional restaurant website with security features, multi-language support, responsive design, and image optimization</span></td>
+                        <td class="quantity">1</td>
+                        <td class="unit-price">Rp 0</td>
+                        <td class="amount">Rp 0</td>
+                    </tr>
+                    <tr>
+                        <td class="description">Web Server Hosting (Cloudflare Pages)<br><span style="font-size: 12px; color: #999;">Annual server cost for website hosting and SSL protection</span></td>
+                        <td class="quantity">1</td>
+                        <td class="unit-price">Rp 160.000</td>
+                        <td class="amount">Rp 160.000</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary">
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span class="label">Subtotal:</span>
+                        <span class="value">Rp 160.000</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Tax (0%):</span>
+                        <span class="value">Rp 0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span class="label">TOTAL:</span>
+                        <span class="value">Rp 160.000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notes">
+                <h4>Payment Notes</h4>
+                <p>• This invoice covers the annual domain and server hosting cost<br>
+                • Payment covers 12 months of web server hosting (Cloudflare Pages)<br>
+                • Custom domain registration is separate<br>
+                • This amount is for annual renewal after the first year</p>
+            </div>
+            
+            <div class="notes">
+                <h4>Website Includes</h4>
+                <p>✓ Professional website design and development<br>
+                ✓ Multi-language support (Indonesian/English)<br>
+                ✓ Dark mode toggle<br>
+                ✓ Security loading screen with verification checks<br>
+                ✓ Mobile-responsive design<br>
+                ✓ Image optimization (88% size reduction)<br>
+                ✓ SSL/HTTPS encryption<br>
+                ✓ Security headers and CSP protection<br>
+                ✓ 9 pages (Home, About, Menu, Reservation, Franchise, Careers, Location, Admin, Coming Soon)</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This is a local invoice for record-keeping purposes.</p>
+            <p>Thank you for your business! | Mie Newmind Restaurant</p>
+        </div>
+        
+        <div class="stamp">
+            <p>Generated: April 4, 2026</p>
+            <p style="margin-top: 10px; font-weight: bold; color: #c7319c;">PAID ✓</p>
+        </div>
+    </div>
+</body>
+</html>

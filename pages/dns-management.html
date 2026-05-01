@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Management - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Mie Newmind</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Dashboard
+                </a>
+                <a href="domains.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Domains
+                </a>
+                <a href="dns-management.html" class="menu-item active">
+                    <span class="menu-icon">▌</span>
+                    DNS Management
+                </a>
+                <a href="hosting.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Hosting
+                </a>
+                <a href="ssl-tls.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    SSL/TLS
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Analytics
+                </a>
+                <a href="billing.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Billing
+                </a>
+                <a href="settings.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">DNS Management</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>DNS Records</h1>
+                    <p>Manage your domain's DNS records and nameserver configuration</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Nameservers</h2>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Primary Nameserver</div>
+                            <div class="info-value">jane.ns.cloudflare.com</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Secondary Nameserver</div>
+                            <div class="info-value">scott.ns.cloudflare.com</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>DNS Records</h2>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Value</th>
+                                    <th>TTL</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>A</strong></td>
+                                    <td>@</td>
+                                    <td>172.66.46.223</td>
+                                    <td>Auto</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CNAME</strong></td>
+                                    <td>www</td>
+                                    <td>newmindmadiun.pages.dev</td>
+                                    <td>Auto</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TXT</strong></td>
+                                    <td>_acme-challenge</td>
+                                    <td>verification_token_xxx</td>
+                                    <td>900</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MX</strong></td>
+                                    <td>@</td>
+                                    <td>mail.newmindmadiun.my.id</td>
+                                    <td>3600</td>
+                                    <td><span class="badge badge-pending">PENDING</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NS</strong></td>
+                                    <td>@</td>
+                                    <td>jane.ns.cloudflare.com</td>
+                                    <td>Auto</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NS</strong></td>
+                                    <td>@</td>
+                                    <td>scott.ns.cloudflare.com</td>
+                                    <td>Auto</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add New Record</h2>
+                    </div>
+                    <div class="info-grid">
+                        <div>
+                            <label style="font-size: 13px; color: #666; margin-bottom: 8px; display: block;">Record Type</label>
+                            <select style="width: 100%; padding: 10px; border: 1px solid #e5e5e7; border-radius: 6px; font-size: 14px;">
+                                <option>A</option>
+                                <option>AAAA</option>
+                                <option>CNAME</option>
+                                <option>MX</option>
+                                <option>TXT</option>
+                                <option>SRV</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #666; margin-bottom: 8px; display: block;">Name</label>
+                            <input type="text" placeholder="example" style="width: 100%; padding: 10px; border: 1px solid #e5e5e7; border-radius: 6px; font-size: 14px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #666; margin-bottom: 8px; display: block;">Value</label>
+                            <input type="text" placeholder="192.0.2.1" style="width: 100%; padding: 10px; border: 1px solid #e5e5e7; border-radius: 6px; font-size: 14px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #666; margin-bottom: 8px; display: block;">TTL</label>
+                            <input type="text" placeholder="3600" style="width: 100%; padding: 10px; border: 1px solid #e5e5e7; border-radius: 6px; font-size: 14px;">
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary">Add Record</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<!-- 
+  ============================================
+  MIE NEWMIND - WEBSITE UTAMA (HOMEPAGE)
+  ============================================
+  Website untuk brand kuliner Mie Pedas Newmind
+  - Multi-bahasa (Indonesia & English)
+  - Dark mode support
+  - Fully responsive
+  
+  URL Live: https://mienewmind.pages.dev
+  ============================================
+-->
+<html lang="id">
+  <head>
+    <!-- Status handled by Cloudflare Worker (server-side) -->
+    
+    <!-- Meta tags untuk SEO dan responsiveness -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Mie Newmind</title>
+    <meta
+      name="description"
+      content="Mie pedas kekinian dengan harga terjangkau dan tempat makan nyaman untuk semua momen kebersamaan."
+    />
+    
+    <!-- Security Meta Tags -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="content-security-policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'self'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#c7319c" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <link
+      rel="icon"
+      href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69ae4577577ae96633cb29e3/5d30e9f3e_logo.png"
+      type="image/png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+  </head>
+  <body>
+    <!-- ======================================
+      SECURITY LOADING SCREEN
+      - Simulates security verification on first visit
+      - Uses cookies for advanced security feature
+      - Displays only if security verification cookie not found
+      ====================================== -->
+    <div id="security-loader" class="security-loader">
+      <div class="security-loader-content">
+        <div class="security-checker">
+          <div class="security-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h2>Security Verification</h2>
+          <p>Verifying website security...</p>
+          
+          <div class="security-checks">
+            <div class="security-check-item">
+              <div class="check-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="check-text">SSL Certificate</span>
+              <div class="check-bar"></div>
+            </div>
+            
+            <div class="security-check-item">
+              <div class="check-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="check-text">Privacy Policy Check</span>
+              <div class="check-bar"></div>
+            </div>
+            
+            <div class="security-check-item">
+              <div class="check-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="check-text">Data Protection Enabled</span>
+              <div class="check-bar"></div>
+            </div>
+            
+            <div class="security-check-item">
+              <div class="check-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="check-text">Safe Browsing Status</span>
+              <div class="check-bar"></div>
+            </div>
+          </div>
+          
+          <p class="security-status">All systems verified. You're safe to proceed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================
+      HEADER / NAVBAR
+      - Logo Mie Newmind
+      - Navigasi menu (About, Menu, Lokasi, Reservasi, Franchise, Karir)
+      - Language toggle (EN/ID)
+      - Theme toggle (Light/Dark mode)
+      - Mobile responsive dengan menu toggle
+      ====================================== -->
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#" aria-label="Mie Newmind">
+          <img
+            class="brand-logo"
+            src="assets/logo/logo.png"
+            alt="Mie Newmind"
+          />
+        </a>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+        <nav class="main-nav" id="main-nav">
+          <a href="pages/restaurant/about.html">About Us</a>
+          <a href="pages/restaurant/menu.html">Menu</a>
+          <a href="pages/restaurant/location.html">Lokasi</a>
+          <a href="pages/restaurant/reservation.html">Reservasi</a>
+          <a href="pages/restaurant/franchise.html">Franchise</a>
+          <a href="pages/restaurant/karir.html">Karir</a>
+        </nav>
+        <div class="nav-actions">
+          <!-- <a href="pages/login.html" class="btn-dashboard" style="padding: 8px 16px; background: #c7319c; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; margin-right: 12px;">DASHBOARD</a> -->
+          <button class="lang-pill" type="button" aria-label="Ganti bahasa">EN</button>
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">◐</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ======================================
+        HERO SECTION
+        - Main headline dan subheading
+        - Call-to-action buttons (Lihat Menu, Pesan Sekarang)
+        - Badge: Terverifikasi Halal, 500+ Outlet
+        - Hero image dengan decorative floating elements
+        ====================================== -->
+      <section class="hero">
+        <div class="hero-bg-shape hero-bg-shape-1" aria-hidden="true"></div>
+        <div class="hero-bg-shape hero-bg-shape-2" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">🌶️ MIE PEDAS KEKINIAN</p>
+            <h1><span class="hero-title-top">MIE</span><span class="hero-title-bottom">NEWMIND</span></h1>
+            <h2>Nikmatnya Pas, Harganya Bersahabat</h2>
+            <p>
+              Nikmati sajian lezat dengan pilihan menu yang terjangkau, tanpa
+              mengurangi kualitas rasa dan kenyamanan. Mie Newmind hadir untuk
+              menjadi pilihan tepat di setiap momen makanmu.
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#menu">LIHAT MENU</a>
+              <a class="btn btn-secondary" href="#reservasi">PESAN SEKARANG</a>
+            </div>
+
+            <div class="hero-badges">
+              <article class="badge-card">
+                <span>حلال</span>
+                <strong>Terverifikasi Halal</strong>
+                <small>BPOM RI: MD 063771000100376</small>
+              </article>
+              <article class="badge-card">
+                <span>🏆</span>
+                <strong>500+ Outlet Mitra</strong>
+                <small>Tersebar di berbagai wilayah Indonesia</small>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-media parallax-image reveal">
+            <span class="hero-float hero-float-left" aria-hidden="true">🌶️</span>
+            <span class="hero-float hero-float-right" aria-hidden="true">🌶️</span>
+            <span class="hero-float hero-float-fire" aria-hidden="true">🔥</span>
+            <span class="hero-float hero-float-onion" aria-hidden="true">🧅</span>
+            <div class="hero-media-frame">
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69ae44cc6211882c8df07391/ab1ce6965_DESAINWEB2.png"
+                alt="Mie Newmind"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================
+        ABOUT SECTION
+        - Deskripsi brand Mie Newmind
+        - Timeline perjalanan perusahaan (2021-2024)
+        - About us image
+        ====================================== -->
+      <section class="about" id="about">
+        <div class="container about-heading">
+          <p class="eyebrow">ABOUT US</p>
+          <h2 class="about-title">Tentang <span>Mie Newmind</span></h2>
+        </div>
+
+        <div class="container about-content two-col">
+          <div class="about-media parallax-image reveal">
+            <img
+              src="assets/pages/about-us.png"
+              alt="Mie Newmind"
+            />
+          </div>
+          <div class="about-copy">
+            <p>
+              <strong>Mie Newmind</strong> Mie Newmind merupakan brand kuliner mie pedas kekinian di
+              Indonesia yang menawarkan cita rasa khas dengan konsep modern.
+              Hadir sebagai tempat makan yang nyaman, Mie Newmind cocok untuk
+              menikmati hidangan lezat bersama teman dan keluarga.
+            </p>
+            <p>
+              Didukung harga yang terjangkau dan pilihan menu yang beragam,
+              Mie Newmind siap menemani setiap momen kebersamaan dengan lebih
+              menyenangkan.
+            </p>
+            <a class="text-link" href="#perjalanan-kami">Selengkapnya →</a>
+          </div>
+        </div>
+
+        <div class="container timeline-wrap" id="perjalanan-kami">
+          <h3 class="timeline-title">Perjalanan <span>Kami</span></h3>
+          <div class="timeline-scroll" id="about-timeline">
+            <div class="timeline-line"><span class="timeline-progress"></span></div>
+            <article class="timeline-item left reveal">
+              <h4>2021</h4>
+              <p>
+                Mie Newmind didirikan oleh Mardigu Wowiek Prasantyo dengan
+                tujuan menghadirkan kuliner mie pedas berkualitas dengan harga
+                terjangkau. Mulai tumbuh dengan konsep kemitraan gerobak kecil
+                yang memberdayakan UMKM.
+              </p>
+            </article>
+            <article class="timeline-item right reveal">
+              <h4>2022</h4>
+              <p>
+                Semakin banyak mitra bergabung. Menu mie pedas dengan nama unik
+                seperti Mi Bupati, Mi Gubernur, dan Mi Presiden mulai dikenal luas oleh masyarakat.
+              </p>
+            </article>
+            <article class="timeline-item left reveal">
+              <h4>2023</h4>
+              <p>
+                Berhasil tumbuh dengan 500+ kemitraan outlet kecil tersebar
+                di berbagai daerah Indonesia. Kuota kemitraan outlet kecil
+                terpenuhi dan resmi ditutup.
+              </p>
+            </article>
+            <article class="timeline-item right reveal">
+              <h4>2024</h4>
+              <p>
+                Mie Newmind mulai mengembangkan konsep dari gerobak menjadi resto
+                yang lebih besar dan nyaman, memperluas penyebaran cabang di
+                berbagai wilayah Indonesia.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================
+        MENU SECTION
+        - Feature card untuk best seller (Mie Bupati)
+        - Menu tabs (Mie, Dimsum, Minuman)
+        - Menu grid dengan dynamic content dari menu.js
+        - Menu modal untuk detail item
+        Data menu diambil dari: js/menu.js (menuData array)
+        ====================================== -->
+      <section class="menu" id="menu">
+        <div class="container">
+          <p class="eyebrow">OUR MENU</p>
+          <h2 class="menu-title">Menu Favorit <span>Kami</span></h2>
+          <p class="menu-sub">Best seller yang paling sering dipesan</p>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img
+                src="assets/products/noodles/mie-bupati.png"
+                alt="Mie Bupati"
+              />
+            </div>
+            <div class="feature-copy">
+              <p class="tag">⭐ BEST SELLER</p>
+              <h3>MIE BUPATI</h3>
+              <p>
+                Mie dengan perpaduan rasa manis dan pedas yang lebih kuat,
+                menghadirkan sensasi rasa yang khas, tersedia level pedas 1-8.
+              </p>
+              <p class="price-label">Mulai dari</p>
+              <p class="price">Rp13.500</p>
+              <p class="price-note">*harga belum termasuk pajak</p>
+              <a class="btn btn-light" href="https://wa.me/6285604030473" target="_blank" rel="noreferrer">PESAN SEKARANG →</a>
+            </div>
+          </div>
+
+          <div class="menu-tabs" role="tablist" aria-label="Kategori Menu">
+            <button class="menu-tab is-active" type="button" role="tab" aria-selected="true" data-menu-tab="mie">MIE</button>
+            <button class="menu-tab" type="button" role="tab" aria-selected="false" data-menu-tab="dimsum">DIMSUM</button>
+            <button class="menu-tab" type="button" role="tab" aria-selected="false" data-menu-tab="minuman">MINUMAN</button>
+          </div>
+
+          <div class="menu-grid" id="menu-grid"></div>
+        </div>
+      </section>
+
+      <div class="menu-modal" id="menu-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="menu-modal-title">
+        <div class="menu-modal-backdrop" data-menu-close></div>
+        <div class="menu-modal-panel">
+          <button class="menu-modal-close" type="button" aria-label="Tutup" data-menu-close>×</button>
+          <div class="menu-modal-body">
+            <img id="menu-modal-image" class="menu-modal-image" src="" alt="">
+            <div class="menu-modal-content">
+              <h3 id="menu-modal-title" class="menu-modal-title"></h3>
+              <p id="menu-modal-desc" class="menu-modal-desc"></p>
+              <p id="menu-modal-price" class="menu-modal-price"></p>
+              <a
+                id="menu-modal-cta"
+                class="menu-modal-cta btn btn-primary"
+                href="https://wa.me/6285604030473"
+                target="_blank"
+                rel="noreferrer"
+              >
+                PESAN SEKARANG →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================
+        LOKASI & RESERVASI SECTION
+        - Location card dengan alamat dan jam operasional
+        - Tombol Google Maps
+        - Reservation card dengan WhatsApp contact
+        - Support both untuk customer dan franchise inquiries
+        ====================================== -->
+      <section class="lokasi" id="lokasi">
+        <div class="container">
+          <div class="visit-head">
+            <p class="eyebrow">VISIT US</p>
+            <h2 class="visit-title">Lokasi &amp; <span>Reservasi</span></h2>
+          </div>
+
+          <div class="visit-grid">
+            <article class="visit-card location-card">
+              <div class="visit-icon visit-icon-location" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 21C12 21 5 14.65 5 10.2C5 6.22 8.13 3 12 3C15.87 3 19 6.22 19 10.2C19 14.65 12 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Lokasi Kami</h3>
+              <p>
+                Tempatnya mudah dicari, suasananya nyaman, dan makanannya bikin
+                nagih. Mie Newmind siap menemani waktu makanmu.
+              </p>
+              <div class="visit-chip address"><span class="chip-mark" aria-hidden="true">📍</span><span>Jl. Garon Raya, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur</span></div>
+              <p class="hours"><span class="chip-mark chip-time" aria-hidden="true">🕒</span><span>07.00 – 23.00 WIB</span><span class="dot">●</span></p>
+              <a class="btn btn-primary" href="https://maps.app.goo.gl/ELcqFWgYjn41XiBd9" target="_blank" rel="noreferrer">BUKA GOOGLE MAPS →</a>
+            </article>
+
+            <article class="visit-card reserve-card" id="reservasi">
+              <div class="visit-icon visit-icon-reserve" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 16.5V19.5C20 19.9 19.84 20.28 19.56 20.56C19.28 20.84 18.9 21 18.5 21C14.52 20.76 10.76 19.08 7.95 16.27C5.14 13.46 3.46 9.7 3.22 5.72C3.2 5.32 3.34 4.94 3.62 4.66C3.9 4.38 4.28 4.22 4.68 4.2H7.68C8.4 4.19 9.03 4.71 9.16 5.42C9.28 6.13 9.49 6.82 9.8 7.48C10 7.92 9.9 8.43 9.55 8.77L8.28 10.05C9.2 11.67 10.53 13 12.15 13.92L13.43 12.65C13.77 12.3 14.28 12.2 14.72 12.4C15.38 12.71 16.07 12.92 16.78 13.04C17.49 13.17 18.01 13.8 18 14.52V16.5H20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Reservasi</h3>
+              <p>
+                Ingin makan tanpa khawatir kehabisan tempat? Reservasi sekarang dan
+                nikmati momen makan yang lebih tenang di Mie Newmind.
+              </p>
+              <div class="visit-chip wa"><span class="wa-icon" aria-hidden="true">💬</span><div><small>WhatsApp</small><strong>085604030473</strong></div></div>
+              <a class="btn btn-secondary" href="https://wa.me/6285604030473" target="_blank" rel="noreferrer">HUBUNGI VIA WHATSAPP →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================================
+        GOFOOD SECTION
+        - Order via GoFood (Gojek)
+        - Delivery link
+        ====================================== -->
+      <section class="lokasi" id="gofood">
+        <div class="container">
+          <div class="visit-head">
+            <p class="eyebrow">DELIVERY</p>
+            <h2 class="visit-title">Pesan via <span>GoFood</span></h2>
+          </div>
+
+          <div class="visit-grid" style="grid-template-columns: minmax(0, 1fr);">
+            <article class="visit-card gofood-card">
+              <h3>Pesan via GoFood</h3>
+              <p>
+                Tersedia delivery online via GoFood (Gojek). Pesan sekarang dan nikmati
+                Mie Newmind di rumahmu dengan mudah dan cepat.
+              </p>
+              <a class="btn btn-primary" href="https://gofood.link/a/MVgE9r3" target="_blank" rel="noreferrer">ORDER VIA GOFOOD →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ======================================
+      FOOTER
+      - Brand logo dan deskripsi
+      - Social media links (Instagram, TikTok, WhatsApp)
+      - Navigation links
+      - Contact information
+      - Copyright info
+      ====================================== -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-col footer-brand">
+          <img src="assets/logo/logo.png" alt="Mie Newmind" class="footer-logo">
+          <p class="footer-description">Mie pedas kekinian dengan harga yang ramah di kantong. Hadir untuk menemani setiap momen makanmu.</p>
+          <div class="socials">
+            <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer" aria-label="Instagram" class="social-ig" title="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer" aria-label="TikTok" class="social-tiktok" title="TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+            <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer" aria-label="WhatsApp" class="social-wa" title="WhatsApp">
+              <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="https://gofood.link/a/MVgE9r3" target="_blank" rel="noreferrer" aria-label="GOJEK" class="social-gojek" title="GOJEK">
+              <img src="assets/logo/gojek.png" alt="GOJEK" />
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>BROWSE</h4>
+          <a href="pages/restaurant/about.html">About Us</a>
+          <a href="pages/restaurant/menu.html">Menu</a>
+          <a href="pages/restaurant/location.html">Lokasi</a>
+          <a href="pages/restaurant/reservation.html">Reservasi</a>
+          <a href="pages/restaurant/franchise.html">Franchise</a>
+          <a href="pages/restaurant/karir.html">Karir</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>KONTAK</h4>
+          <div class="footer-contact-item">
+            <p class="footer-label">WHATSAPP</p>
+            <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer">085604030473</a>
+          </div>
+          <div class="footer-contact-item">
+            <p class="footer-label">INSTAGRAM</p>
+            <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer">@mienewmind</a>
+          </div>
+          <div class="footer-contact-item">
+            <p class="footer-label">TIKTOK</p>
+            <a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer">@mienewmind</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>ALAMAT</h4>
+          <p class="footer-address">Jl. Garon Raya, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur 63451</p>
+          <div class="footer-hours">
+            <p class="footer-label">JAM OPERASIONAL</p>
+            <p class="footer-time">Senin - Jum'at: 09.00 - 22.00 WIB</p>
+            <p class="footer-time">Sabtu - Minggu: 09.00 - 23.00 WIB</p>
+            <p class="footer-status"><span class="status-dot"></span>Buka</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Mie Newmind. All Rights Reserved.</p>
+        <div class="footer-badges">
+          <span class="badge-verified">Terverifikasi</span>
+          <a href="#" class="badge-halal">
+            <span class="halal-symbol">حلال</span>
+            <span class="halal-label">Halal</span>
+          </a>
+          <span class="badge-bpom">BPOM RI</span>
+        </div>
+      </div>
+
+    </footer>
+
+    <!-- ======================================
+      JAVASCRIPT FILES
+      - script.js: Main logic (navbar active state, theme toggle, language toggle, forms)
+      - menu.js: Menu data dan modal interaction
+      ====================================== -->
+    <script src="js/script.js"></script>
+    <script src="js/menu.js"></script>
+  </body>
+</html>

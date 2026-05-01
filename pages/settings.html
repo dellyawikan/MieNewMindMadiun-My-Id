@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><h2>Mie Newmind</h2></div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item"><span class="menu-icon">▌</span> Dashboard</a>
+                <a href="domains.html" class="menu-item"><span class="menu-icon">▌</span> Domains</a>
+                <a href="dns-management.html" class="menu-item"><span class="menu-icon">▌</span> DNS Management</a>
+                <a href="hosting.html" class="menu-item"><span class="menu-icon">▌</span> Hosting</a>
+                <a href="ssl-tls.html" class="menu-item"><span class="menu-icon">▌</span> SSL/TLS</a>
+                <a href="analytics.html" class="menu-item"><span class="menu-icon">▌</span> Analytics</a>
+                <a href="billing.html" class="menu-item"><span class="menu-icon">▌</span> Billing</a>
+                <a href="settings.html" class="menu-item active"><span class="menu-icon">▌</span> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">Settings</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>Account Settings</h1>
+                    <p>Manage your account preferences and security settings</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Account Information</h2></div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Account Email</div>
+                            <div class="info-value">admin@newmindmadiun.my.id</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Account Type</div>
+                            <div class="info-value">Administrator</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Account Status</div>
+                            <div class="info-value" style="color: #52b788;">Active</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Member Since</div>
+                            <div class="info-value">March 15, 2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Security Settings</h2></div>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">Two-Factor Authentication (2FA)</div>
+                                <div class="status-description">Add an extra layer of security</div>
+                            </div>
+                            <span class="badge badge-pending">DISABLED</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">API Keys</div>
+                                <div class="status-description">Manage API authentication</div>
+                            </div>
+                            <span class="badge badge-active pulse">CONFIGURED</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">Login Activity</div>
+                                <div class="status-description">Monitor recent login attempts</div>
+                            </div>
+                            <span class="badge badge-active pulse">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Notification Preferences</h2></div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Notification Type</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Domain Expiry Alerts</td>
+                                    <td>admin@newmindmadiun.my.id</td>
+                                    <td><span class="badge badge-active pulse">ENABLED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SSL Certificate Updates</td>
+                                    <td>admin@newmindmadiun.my.id</td>
+                                    <td><span class="badge badge-active pulse">ENABLED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Billing Invoices</td>
+                                    <td>admin@newmindmadiun.my.id</td>
+                                    <td><span class="badge badge-active pulse">ENABLED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Security Alerts</td>
+                                    <td>admin@newmindmadiun.my.id</td>
+                                    <td><span class="badge badge-active pulse">ENABLED</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Account Actions</h2></div>
+                    <div class="button-grid">
+                        <button class="btn btn-secondary">Change Password</button>
+                        <button class="btn btn-secondary">Enable 2FA</button>
+                        <button class="btn btn-secondary">View API Keys</button>
+                        <button class="btn btn-secondary">Download Data</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Danger Zone</h2></div>
+                    <div class="button-grid">
+                        <button class="btn" style="background: #dc3545; color: white;">Delete Account</button>
+                        <button class="btn" style="background: #ffc107; color: #333;">Close Account</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

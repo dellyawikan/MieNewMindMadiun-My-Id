@@ -1,0 +1,15 @@
+
+ ⛅️ wrangler 4.78.0 (update available 4.80.0)
+─────────────────────────────────────────────
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mPages now has wrangler.toml support.[0m
+
+  We detected a configuration file at /Users/pvegananda/Dev/05-Workspaces/02-Templates/html/MieNewMind-2/wrangler.toml but it is missing the "pages_build_output_dir" field, required by Pages.
+  If you would like to use this configuration file to deploy your project, please use "pages_build_output_dir" to specify the directory of static files to upload.
+  Ignoring configuration file for now, and proceeding with project deploy.
+
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThis command cannot be run in a non-interactive context[0m
+
+
+🪵  Logs were written to "/Users/pvegananda/Library/Preferences/.wrangler/logs/wrangler-2026-04-04_03-23-06_937.log"

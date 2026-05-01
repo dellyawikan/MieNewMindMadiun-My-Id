@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Mie Newmind</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item active">
+                    <span class="menu-icon">▌</span>
+                    Dashboard
+                </a>
+                <a href="domains.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Domains
+                </a>
+                <a href="dns-management.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    DNS Management
+                </a>
+                <a href="hosting.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Hosting
+                </a>
+                <a href="ssl-tls.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    SSL/TLS
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Analytics
+                </a>
+                <a href="billing.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Billing
+                </a>
+                <a href="settings.html" class="menu-item">
+                    <span class="menu-icon">▌</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">Dashboard</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>Welcome to Your Hosting Control Panel</h1>
+                    <p>Manage your domain, hosting, and security settings</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Domain Status</div>
+                        <div class="stat-value" style="color: #52b788;">Active</div>
+                        <div class="stat-subtext">newmindmadiun.my.id</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Uptime</div>
+                        <div class="stat-value">99.95%</div>
+                        <div class="stat-subtext">Last 30 days</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">SSL Certificate</div>
+                        <div class="stat-value" style="color: #52b788;">Valid</div>
+                        <div class="stat-subtext">Expires March 15, 2027</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Security Grade</div>
+                        <div class="stat-value">B+</div>
+                        <div class="stat-subtext">Mozilla Observatory</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="button-grid">
+                        <button class="btn btn-primary">Update Domain</button>
+                        <button class="btn btn-secondary">Manage DNS</button>
+                        <button class="btn btn-secondary">SSL Settings</button>
+                        <button class="btn btn-secondary">View Logs</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>System Status</h2>
+                    </div>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">Cloudflare Pages</div>
+                                <div class="status-description">Web hosting service</div>
+                            </div>
+                            <span class="badge badge-active pulse">OPERATIONAL</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">SSL Certificate</div>
+                                <div class="status-description">HTTPS encryption</div>
+                            </div>
+                            <span class="badge badge-active pulse">VALID</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-info">
+                                <div class="status-name">DNS Records</div>
+                                <div class="status-description">Domain pointing configured</div>
+                            </div>
+                            <span class="badge badge-active pulse">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

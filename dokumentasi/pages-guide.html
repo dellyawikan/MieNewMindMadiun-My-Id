@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Panduan Edit Setiap Halaman - Mie Newmind</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c7319c;
+            --accent: #eccb30;
+            --success: #10b981;
+            --danger: #c7333e;
+            --light-bg: #f8f1f7;
+            --dark-text: #141116;
+            --gray: #5f5660;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        header p {
+            color: var(--gray);
+            font-size: 1em;
+        }
+
+        .page-selector {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-selector h2 {
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .page-btn {
+            padding: 15px 20px;
+            border: 3px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            color: var(--dark-text);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .page-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .content-area {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-content h1 {
+            color: var(--primary);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .page-content h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            border-bottom: 3px solid var(--light-bg);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-content h3 {
+            color: var(--primary);
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .page-content h4 {
+            color: var(--dark-text);
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        .page-content ul, .page-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .page-content li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .page-content strong {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .page-content code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d73a49;
+            font-size: 0.9em;
+        }
+
+        .page-content pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .page-content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .section-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .section-box h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .edit-path {
+            background: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .icon {
+            display: inline-block;
+            font-size: 1.3em;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        table th {
+            background: var(--light-bg);
+            color: var(--primary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #fafafa;
+        }
+
+        .warning {
+            background: #fee;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .warning strong {
+            color: var(--danger);
+        }
+
+        .info {
+            background: #eef;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .section-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .section-link {
+            padding: 8px 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .section-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ===== RETURN BUTTON & TOP NAV ===== */
+        .return-nav {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .return-btn:hover {
+            background: #a71f6a;
+            transform: translateX(-5px);
+        }
+
+        .breadcrumb {
+            font-size: 0.9em;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .help-text {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+
+        .current-page-info {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff 100%);
+            border: 2px solid var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .current-page-info p {
+            margin: 0;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+
+            .page-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+
+            .page-content h2 {
+                font-size: 1.4em;
+            }
+
+            .return-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .return-nav > * {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Panduan Edit Setiap Halaman</h1>
+            <p>Penjelasan detail dari atas ke bawah untuk setiap halaman website Mie Newmind</p>
+        </header>
+
+        <!-- RETURN & TOP NAVIGATION -->
+        <div class="return-nav">
+            <a href="index.html" class="return-btn">
+                ← Kembali ke Panduan Utama
+            </a>
+            <div class="breadcrumb">
+                📍 <a href="index.html">Beranda</a> / Edit Per Halaman
+            </div>
+        </div>
+
+        <div class="help-text">
+            💡 <strong>Tips untuk Pemula:</strong> Klik salah satu halaman di bawah, kemudian baca dari atas ke bawah untuk melihat semua elemen yang bisa diedit. Setiap bagian dijelaskan dengan kode contoh!
+        </div>
+
+        <div class="page-selector">
+            <h2>Pilih Halaman yang Ingin Anda Edit:</h2>
+            <div class="page-grid">
+                <button class="page-btn active" data-page="home">🏠 Home</button>
+                <button class="page-btn" data-page="menu">🍜 Menu</button>
+                <button class="page-btn" data-page="about">👥 Tentang Kami</button>
+                <button class="page-btn" data-page="karir">💼 Karir</button>
+                <button class="page-btn" data-page="lokasi">📍 Lokasi</button>
+                <button class="page-btn" data-page="reservasi">📅 Reservasi</button>
+                <button class="page-btn" data-page="franchise">🏪 Franchise</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- HOME PAGE -->
+            <div id="home" class="page-content active">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Home (index.html)</strong> - Halaman pertama yang dilihat pengunjung website</p>
+                </div>
+                <h1>🏠 HALAMAN HOME (index.html)</h1>
+                <p>Halaman utama website yang pertama kali dilihat pengunjung. Berisi hero section, produk pilihan, promo, dan CTA penting.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR (Bagian Atas)</h2>
+                <div class="edit-path">File: index.html (Baris 1-30)</div>
+                <div class="section-box">
+                    <h4>Struktur Navbar:</h4>
+                    <ul>
+                        <li><strong>Logo:</strong> Gambar di sebelah kiri (assets/logo/logo.png)</li>
+                        <li><strong>Menu Links:</strong> Beranda, Menu, Tentang Kami, Lokasi, Reservasi, Karir, Franchise</li>
+                        <li><strong>Button:</strong> WhatsApp atau Login</li>
+                    </ul>
+                </div>
+                <p><strong>📝 Cara Edit Logo:</strong></p>
+                <pre><code>&lt;img src="assets/logo/logo.png" class="brand-logo"&gt;</code></pre>
+                <p>Ganti path menjadi logo baru Anda.</p>
+
+                <p><strong>📝 Cara Edit Menu Links:</strong></p>
+                <pre><code>&lt;nav class="main-nav"&gt;
+  &lt;a href="index.html"&gt;Beranda&lt;/a&gt;
+  &lt;a href="menu.html"&gt;Menu Kami&lt;/a&gt;
+  &lt;a href="about.html"&gt;Tentang Kami&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+                <p>Edit text di dalam tag <code>&lt;a&gt;</code> untuk ubah nama menu.</p>
+
+                <h2><span class="icon">2️⃣</span> HERO SECTION (Bagian Besar di Atas)</h2>
+                <div class="edit-path">File: index.html (Baris 31-70)</div>
+                <div class="section-box">
+                    <h4>Bagian-Bagian Hero:</h4>
+                    <ul>
+                        <li><strong>Background Image:</strong> Gambar besar di belakang</li>
+                        <li><strong>Judul (Title):</strong> Text besar "Selamat Datang"</li>
+                        <li><strong>Subtitle:</strong> Text kecil di bawah judul</li>
+                        <li><strong>CTA Button:</strong> Tombol "Lihat Menu"</li>
+                    </ul>
+                </div>
+
+                <p><strong>📝 Cara Ubah Background Image:</strong></p>
+                <pre><code>&lt;section class="hero" style="background-image: url('assets/pages/hero-home.jpg');"&gt;</code></pre>
+                <p>Ganti path <code>'assets/pages/hero-home.jpg'</code> dengan gambar baru.</p>
+
+                <p><strong>📝 Cara Ubah Judul Hero:</strong></p>
+                <pre><code>&lt;h1 class="hero-title"&gt;Selamat Datang di Mie Newmind&lt;/h1&gt;</code></pre>
+                <p>Edit text di dalam <code>&lt;h1&gt;...&lt;/h1&gt;</code></p>
+
+                <p><strong>📝 Cara Ubah Subtitle:</strong></p>
+                <pre><code>&lt;p class="hero-subtitle"&gt;Mie Pedas Terbaik di Kota&lt;/p&gt;</code></pre>
+                <p>Edit text di dalam <code>&lt;p&gt;...&lt;/p&gt;</code></p>
+
+                <p><strong>📝 Cara Ubah Button:</strong></p>
+                <pre><code>&lt;a href="#menu-section" class="btn btn-primary"&gt;Lihat Menu Kami&lt;/a&gt;</code></pre>
+                <p>Edit text untuk mengubah label tombol.</p>
+
+                <h2><span class="icon">3️⃣</span> PROMO/FEATURED SECTION</h2>
+                <div class="edit-path">File: index.html (Baris 71-150)</div>
+                <p>Section ini menampilkan menu pilihan atau promo spesial dalam bentuk card.</p>
+
+                <p><strong>📝 Struktur Card:</strong></p>
+                <pre><code>&lt;div class="product-card"&gt;
+  &lt;img src="assets/products/mie-special.jpg" alt="Mie Special"&gt;
+  &lt;h3&gt;Mie Spesial&lt;/h3&gt;
+  &lt;p&gt;Deskripsi singkat produk&lt;/p&gt;
+  &lt;div class="price"&gt;Rp15.000&lt;/div&gt;
+  &lt;button&gt;Lihat Detail&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+                <p><strong>📝 Cara Ubah Card:</strong></p>
+                <ul>
+                    <li>Gambar: Edit path di <code>src="..."</code></li>
+                    <li>Nama: Edit text di <code>&lt;h3&gt;</code></li>
+                    <li>Harga: Edit di <code>&lt;div class="price"&gt;</code></li>
+                    <li>Deskripsi: Edit di <code>&lt;p&gt;</code></li>
+                </ul>
+
+                <h2><span class="icon">4️⃣</span> FOOTER (Bagian Bawah)</h2>
+                <div class="edit-path">File: index.html (Baris terakhir)</div>
+                <div class="section-box">
+                    <h4>Bagian Footer:</h4>
+                    <ul>
+                        <li><strong>Informasi Toko:</strong> Deskripsi singkat</li>
+                        <li><strong>Kontak:</strong> Nomor WhatsApp, Email</li>
+                        <li><strong>Alamat:</strong> Lokasi toko</li>
+                        <li><strong>Links:</strong> Link ke halaman lain</li>
+                        <li><strong>Social Media:</strong> Link Instagram, Facebook, dll</li>
+                    </ul>
+                </div>
+
+                <p><strong>📝 Cara Edit Kontak WhatsApp:</strong></p>
+                <pre><code>&lt;a href="https://wa.me/6285604030473"&gt;Hubungi Kami&lt;/a&gt;</code></pre>
+                <p>Ganti nomor <code>6285604030473</code> dengan nomor WhatsApp Anda.</p>
+
+                <p><strong>📝 Cara Edit Alamat:</strong></p>
+                <pre><code>&lt;p&gt;📍 Jalan Merdeka No. 123, Kota Anda&lt;/p&gt;</code></pre>
+                <p>Edit alamat sesuai lokasi toko.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> Halaman home adalah yang paling penting karena pertama kali dilihat pengunjung. Pastikan hero section menarik, promo jelas, dan kontak mudah ditemukan!
+                </div>
+            </div>
+
+            <!-- MENU PAGE -->
+            <div id="menu" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Menu (menu.html)</strong> - Menampilkan semua produk dengan kategori dan harga</p>
+                </div>
+                <h1>🍜 HALAMAN MENU (menu.html)</h1>
+                <p>Halaman yang menampilkan semua produk menu dengan kategori (Mie, Nasi, Minuman, Dessert). Pengunjung bisa melihat harga dan detail setiap produk.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR (Sama seperti Home)</h2>
+                <p>Navbar di halaman menu sama dengan halaman home. Lihat penjelasan di halaman home.</p>
+
+                <h2><span class="icon">2️⃣</span> HEADER SECTION</h2>
+                <div class="edit-path">File: menu.html (Baris 30-60)</div>
+                <p>Section yang menunjukkan judul halaman dan filter kategori.</p>
+
+                <p><strong>📝 Judul Halaman:</strong></p>
+                <pre><code>&lt;h1&gt;Menu Kami&lt;/h1&gt;</code></pre>
+
+                <p><strong>📝 Filter Tombol:</strong></p>
+                <pre><code>&lt;div class="category-filters"&gt;
+  &lt;button class="filter-btn active" data-category="all"&gt;Semua&lt;/button&gt;
+  &lt;button class="filter-btn" data-category="mie"&gt;Mie&lt;/button&gt;
+  &lt;button class="filter-btn" data-category="nasi"&gt;Nasi&lt;/button&gt;
+  &lt;button class="filter-btn" data-category="minuman"&gt;Minuman&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> PRODUCT GRID (Daftar Produk)</h2>
+                <div class="edit-path">File: menu.html (Baris 61-300) + js/menu.js</div>
+                <p>Grid yang menampilkan semua produk dalam bentuk card.</p>
+
+                <div class="warning">
+                    <strong>⚠️ PENTING:</strong> Data produk tersimpan di <code>js/menu.js</code>, bukan di HTML. Jika ingin ubah produk, buka file <code>js/menu.js</code>!
+                </div>
+
+                <p><strong>📝 Struktur Produk Card:</strong></p>
+                <pre><code>&lt;div class="menu-card" data-category="mie"&gt;
+  &lt;img src="assets/products/mie/mie-bupati.jpg" alt="Mie Bupati"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h3&gt;Mie Bupati&lt;/h3&gt;
+    &lt;p class="description"&gt;Mie dengan topping special&lt;/p&gt;
+    &lt;div class="card-footer"&gt;
+      &lt;span class="price"&gt;Rp11.500&lt;/span&gt;
+      &lt;button class="btn btn-order"&gt;Pesan&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <p><strong>📝 Cara Ubah Produk (Edit js/menu.js):</strong></p>
+                <pre><code>const menuData = {
+  mie: [
+    {
+      id: 1,
+      name: "Mie Bupati",
+      category: "mie",
+      price: "Rp11.500",          // ← UBAH HARGA
+      description: "Mie dengan topping special",
+      image: "assets/products/mie/mie-bupati.jpg",
+      rating: 4.8
+    }
+  ]
+}</code></pre>
+
+                <p><strong>📝 Cara Tambah Produk Baru:</strong></p>
+                <pre><code>mie: [
+  { ... produk lama ... },
+  {
+    id: 99,
+    name: "Mie Original",
+    category: "mie",
+    price: "Rp10.000",
+    description: "Mie original resep rumahan",
+    image: "assets/products/mie/mie-original.jpg",
+    rating: 4.5
+  }
+]</code></pre>
+
+                <h2><span class="icon">4️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman home.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> 
+                    <ul>
+                        <li>Gunakan foto produk berkualitas tinggi (minimal 300x300px)</li>
+                        <li>Harga selalu diperbarui di <code>js/menu.js</code></li>
+                        <li>Jangan lupa rating untuk menarik pembeli!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ABOUT PAGE -->
+            <div id="about" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Tentang Kami (about.html)</strong> - Menceritakan sejarah, visi, misi, dan tim</p>
+                </div>
+                <h1>👥 HALAMAN TENTANG KAMI (about.html)</h1>
+                <p>Halaman yang menceritakan sejarah, visi, misi, dan tim Mie Newmind. Membangun kepercayaan dengan calon pelanggan.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR</h2>
+                <p>Navbar standar, sama seperti halaman lain.</p>
+
+                <h2><span class="icon">2️⃣</span> HEADER/HERO SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 30-80)</div>
+                <p>Hero section untuk halaman tentang kami.</p>
+
+                <p><strong>📝 Judul Halaman:</strong></p>
+                <pre><code>&lt;section class="page-hero"&gt;
+  &lt;h1&gt;Tentang Kami&lt;/h1&gt;
+  &lt;p&gt;Kisah perjalanan Mie Newmind dimulai...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> CERITA/STORY SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 81-150)</div>
+                <p>Section yang menceritakan sejarah dan latar belakang bisnis.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="story-section"&gt;
+  &lt;div class="story-content"&gt;
+    &lt;h2&gt;Kisah Kami Dimulai...&lt;/h2&gt;
+    &lt;p&gt;Pada tahun 2015, kami memulai dengan mimpi sederhana...&lt;/p&gt;
+    &lt;p&gt;Setiap hari kami berinovasi untuk memberikan yang terbaik...&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;img src="assets/pages/story.jpg" alt="Tiramisu Cake"&gt;
+&lt;/section&gt;</code></pre>
+
+                <p><strong>📝 Cara Edit Cerita:</strong></p>
+                <ul>
+                    <li>Edit text di dalam <code>&lt;p&gt;</code> di story section</li>
+                    <li>Ganti gambar di <code>src="assets/pages/story.jpg"</code></li>
+                </ul>
+
+                <h2><span class="icon">4️⃣</span> VISI & MISI SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 151-220)</div>
+                <p>Menampilkan visi dan misi bisnis.</p>
+
+                <p><strong>📝 Struktur Visi & Misi:</strong></p>
+                <pre><code>&lt;section class="vision-mission"&gt;
+  &lt;div class="vm-card"&gt;
+    &lt;h3&gt;Visi Kami&lt;/h3&gt;
+    &lt;p&gt;Menjadi restoran mie terbaik dan paling dicintai di Indonesia&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="vm-card"&gt;
+    &lt;h3&gt;Misi Kami&lt;/h3&gt;
+    &lt;p&gt;Menyediakan mie berkualitas tinggi dengan harga terjangkau...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">5️⃣</span> VALUES SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 221-300)</div>
+                <p>Menampilkan nilai-nilai perusahaan.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="values"&gt;
+  &lt;h2&gt;Nilai-Nilai Kami&lt;/h2&gt;
+  
+  &lt;div class="value-item"&gt;
+    &lt;h3&gt;Kualitas&lt;/h3&gt;
+    &lt;p&gt;Kami hanya menggunakan bahan-bahan terbaik...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="value-item"&gt;
+    &lt;h3&gt;Inovasi&lt;/h3&gt;
+    &lt;p&gt;Kami terus berinovasi menciptakan menu baru...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="value-item"&gt;
+    &lt;h3&gt;Pelayanan&lt;/h3&gt;
+    &lt;p&gt;Kepuasan pelanggan adalah prioritas utama...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">6️⃣</span> TEAM SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 301-400)</div>
+                <p>Menampilkan tim atau owner bisnis.</p>
+
+                <p><strong>📝 Struktur Tim:</strong></p>
+                <pre><code>&lt;section class="team-section"&gt;
+  &lt;h2&gt;Tim Kami&lt;/h2&gt;
+  
+  &lt;div class="team-card"&gt;
+    &lt;img src="assets/team/john.jpg" alt="John Doe"&gt;
+    &lt;h3&gt;John Doe&lt;/h3&gt;
+    &lt;p class="position"&gt;Owner & Chef&lt;/p&gt;
+    &lt;p class="bio"&gt;Passionate about creating amazing food...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">7️⃣</span> STATS SECTION</h2>
+                <div class="edit-path">File: about.html (Baris 401-450)</div>
+                <p>Menampilkan statistik bisnis (pelanggan, cabang, tahun pengalaman).</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="stats"&gt;
+  &lt;div class="stat-item"&gt;
+    &lt;h3 class="stat-number"&gt;50000+&lt;/h3&gt;
+    &lt;p class="stat-label"&gt;Pelanggan Puas&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">8️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman lain.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> Halaman tentang kami membangun kepercayaan. Pastikan cerita authentic dan menginspirasi!
+                </div>
+            </div>
+
+            <!-- KARIR PAGE -->
+            <div id="karir" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Karir (karir.html)</strong> - Untuk merekrut karyawan dan menampilkan lowongan kerja</p>
+                </div>
+                <h1>💼 HALAMAN KARIR (karir.html)</h1>
+                <p>Halaman untuk merekrut karyawan. Menampilkan lowongan kerja dan informasi perusahaan untuk calon pekerja.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR</h2>
+                <p>Navbar standar.</p>
+
+                <h2><span class="icon">2️⃣</span> HERO SECTION</h2>
+                <div class="edit-path">File: karir.html (Baris 30-80)</div>
+                <pre><code>&lt;section class="hero"&gt;
+  &lt;h1&gt;Bergabunglah dengan Tim Kami&lt;/h1&gt;
+  &lt;p&gt;Kami mencari talenta terbaik untuk berkembang bersama&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> WHY JOIN US SECTION</h2>
+                <div class="edit-path">File: karir.html (Baris 81-150)</div>
+                <p>Menampilkan alasan mengapa bergabung dengan perusahaan.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="why-join"&gt;
+  &lt;h2&gt;Mengapa Bergabung Dengan Kami?&lt;/h2&gt;
+  
+  &lt;div class="benefit-item"&gt;
+    &lt;h3&gt;💰 Gaji Kompetitif&lt;/h3&gt;
+    &lt;p&gt;Kami memberikan gaji sesuai standar industri...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="benefit-item"&gt;
+    &lt;h3&gt;🎓 Pelatihan Profesional&lt;/h3&gt;
+    &lt;p&gt;Kami memiliki program training lengkap...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">4️⃣</span> JOB OPENINGS SECTION</h2>
+                <div class="edit-path">File: karir.html (Baris 151-300)</div>
+                <p>Daftar posisi yang dibuka yang disimpan di <code>js/jobs.js</code>.</p>
+
+                <p><strong>📝 Struktur Job Card:</strong></p>
+                <pre><code>&lt;div class="job-card"&gt;
+  &lt;div class="job-header"&gt;
+    &lt;h3&gt;Chef Mie&lt;/h3&gt;
+    &lt;span class="job-type"&gt;Full-Time&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;p class="job-location"&gt;📍 Jakarta Pusat&lt;/p&gt;
+  
+  &lt;div class="job-details"&gt;
+    <ul>
+      <li>Pengalaman: 2+ tahun</li>
+      <li>Gaji: Rp 3-4 juta</li>
+      <li>Benefit: Asuransi, Tunjangan Makan</li>
+    </ul>
+  &lt;/div&gt;
+  
+  &lt;button class="btn btn-apply"&gt;Lamar Sekarang&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+                <p><strong>📝 Data Job (js/jobs.js):</strong></p>
+                <pre><code>const jobOpenings = [
+  {
+    id: 1,
+    title: "Chef Mie",
+    location: "Jakarta Pusat",
+    type: "Full-Time",
+    salary: "Rp 3-4 juta",
+    experience: "2+ tahun",
+    description: "Kami mencari chef mie berpengalaman...",
+    requirements: [
+      "Pengalaman memasak mie min 2 tahun",
+      "Mahir berbagai jenis mie",
+      "Kerja tim yang baik"
+    ],
+    benefits: ["Asuransi", "Tunjangan Makan", "Bonus"]
+  }
+]</code></pre>
+
+                <h2><span class="icon">5️⃣</span> APPLICATION FORM SECTION</h2>
+                <div class="edit-path">File: karir.html (Baris 301-450)</div>
+                <p>Form untuk pelamar mengirim aplikasi.</p>
+
+                <p><strong>📝 Struktur Form:</strong></p>
+                <pre><code>&lt;form id="applicationForm" onsubmit="handleJobApplication(event)"&gt;
+  &lt;input type="text" name="fullname" placeholder="Nama Lengkap" required&gt;
+  &lt;input type="email" name="email" placeholder="Email" required&gt;
+  &lt;input type="tel" name="phone" placeholder="Nomor HP" required&gt;
+  
+  &lt;select name="position" required&gt;
+    &lt;option&gt;Pilih Posisi&lt;/option&gt;
+    &lt;option value="chef"&gt;Chef Mie&lt;/option&gt;
+    &lt;option value="cashier"&gt;Kasir&lt;/option&gt;
+    &lt;option value="manager"&gt;Manager&lt;/option&gt;
+  &lt;/select&gt;
+  
+  &lt;textarea name="message" placeholder="Ceritakan tentang Anda..." rows="5"&gt;&lt;/textarea&gt;
+  
+  &lt;button type="submit" class="btn btn-primary"&gt;Kirim Aplikasi&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <h2><span class="icon">6️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman lain.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> Halaman karir harus menarik untuk calon karyawan. Jelaskan dengan baik benefit dan kesempatan berkembang!
+                </div>
+            </div>
+
+            <!-- LOKASI PAGE -->
+            <div id="lokasi" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Lokasi (location.html)</strong> - Menampilkan semua cabang, jam buka, dan peta interaktif</p>
+                </div>
+                <h1>📍 HALAMAN LOKASI (location.html)</h1>
+                <p>Halaman yang menampilkan lokasi cabang, jam operasional, dan peta interaktif untuk memudahkan pelanggan menemukan toko.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR</h2>
+                <p>Navbar standar.</p>
+
+                <h2><span class="icon">2️⃣</span> HERO SECTION</h2>
+                <div class="edit-path">File: location.html (Baris 30-80)</div>
+                <pre><code>&lt;section class="hero"&gt;
+  &lt;h1&gt;Kunjungi Lokasi Kami&lt;/h1&gt;
+  &lt;p&gt;Kami hadir di berbagai kota untuk melayani Anda&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> LOCATION LISTING SECTION</h2>
+                <div class="edit-path">File: location.html (Baris 81-400)</div>
+                <p>Daftar semua lokasi cabang yang tersimpan di <code>js/locations.js</code>.</p>
+
+                <p><strong>📝 Struktur Location Card:</strong></p>
+                <pre><code>&lt;div class="location-card"&gt;
+  &lt;div class="location-header"&gt;
+    &lt;h2&gt;Jakarta Pusat&lt;/h2&gt;
+    &lt;span class="status open"&gt;Buka&lt;/span&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="location-info"&gt;
+    &lt;p&gt;📍 &lt;strong&gt;Alamat:&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Jalan Merdeka No. 123, Jakarta Pusat&lt;/p&gt;
+    
+    &lt;p&gt;⏰ &lt;strong&gt;Jam Buka:&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Senin - Jumat: 10.00 - 22.00&lt;/p&gt;
+    &lt;p&gt;Sabtu - Minggu: 09.00 - 23.00&lt;/p&gt;
+    
+    &lt;p&gt;📞 &lt;strong&gt;Telepon:&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href="tel:+62213456789"&gt;+62-21-3456789&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;a href="https://maps.google.com/?q=..." class="btn btn-maps"&gt;Buka Google Maps&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+                <p><strong>📝 Data Lokasi (js/locations.js):</strong></p>
+                <pre><code>const locations = [
+  {
+    id: 1,
+    name: "Jakarta Pusat",
+    address: "Jalan Merdeka No. 123, Jakarta Pusat 12345",
+    phone: "+62213456789",
+    hours: {
+      weekday: "10:00 - 22:00",
+      weekend: "09:00 - 23:00"
+    },
+    googleMapsUrl: "https://maps.google.com/?q=...",
+    coordinates: {
+      lat: -6.1751,
+      lng: 106.8291
+    }
+  }
+]</code></pre>
+
+                <h2><span class="icon">4️⃣</span> INTERACTIVE MAP SECTION</h2>
+                <div class="edit-path">File: location.html (Baris 401-500)</div>
+                <p>Peta interaktif yang menunjukkan semua lokasi (menggunakan Google Maps API atau OpenStreetMap).</p>
+
+                <p><strong>📝 Setup Google Maps:</strong></p>
+                <pre><code>&lt;div id="map" style="width: 100%; height: 500px;"&gt;&lt;/div&gt;
+
+&lt;script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: { lat: -6.1751, lng: 106.8291 }
+  });
+&lt;/script&gt;</code></pre>
+
+                <h2><span class="icon">5️⃣</span> CALL TO ACTION SECTION</h2>
+                <div class="edit-path">File: location.html (Baris 501-550)</div>
+                <p>Section dengan tombol untuk mendapatkan arah atau memesan.</p>
+
+                <pre><code>&lt;section class="cta-section"&gt;
+  &lt;h2&gt;Kunjungi Kami Sekarang&lt;/h2&gt;
+  &lt;a href="#" class="btn btn-primary"&gt;Pesan Sekarang&lt;/a&gt;
+  &lt;a href="#" class="btn btn-secondary"&gt;Hubungi Kami&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">6️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman lain.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> Pastikan alamat, jam buka, dan nomor telepon selalu update! Ini sangat penting untuk pelanggan!
+                </div>
+            </div>
+
+            <!-- RESERVASI PAGE -->
+            <div id="reservasi" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Reservasi (reservation.html)</strong> - Untuk booking tempat dengan form yang terkoneksi WhatsApp</p>
+                </div>
+                <h1>📅 HALAMAN RESERVASI (reservation.html)</h1>
+                <p>Halaman untuk booking tempat di restoran. Pelanggan bisa memilih tanggal, jam, dan jumlah tamu.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR</h2>
+                <p>Navbar standar.</p>
+
+                <h2><span class="icon">2️⃣</span> HERO SECTION</h2>
+                <div class="edit-path">File: reservation.html (Baris 30-80)</div>
+                <pre><code>&lt;section class="hero"&gt;
+  &lt;h1&gt;Reservasi Tempat&lt;/h1&gt;
+  &lt;p&gt;Pesan tempat Anda sekarang dan nikmati pengalaman terbaik&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> RESERVATION FORM SECTION</h2>
+                <div class="edit-path">File: reservation.html (Baris 81-250)</div>
+                <p>Form reservasi yang penting sekali!</p>
+
+                <p><strong>📝 Struktur Form:</strong></p>
+                <pre><code>&lt;section class="reservation-form-section"&gt;
+  &lt;form id="reservationForm" onsubmit="handleReservation(event)"&gt;
+    &lt;!-- NAMA --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Nama Lengkap&lt;/label&gt;
+      &lt;input type="text" name="fullname" placeholder="Nama Anda" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- EMAIL --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Email&lt;/label&gt;
+      &lt;input type="email" name="email" placeholder="Email Anda" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- TELEPON --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Nomor Telepon&lt;/label&gt;
+      &lt;input type="tel" name="phone" placeholder="08xxxxxxxxxx" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- TANGGAL --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Tanggal Reservasi&lt;/label&gt;
+      &lt;input type="date" name="date" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- JAM --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Jam Mulai&lt;/label&gt;
+      &lt;input type="time" name="time" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- JUMLAH TAMU --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Jumlah Tamu&lt;/label&gt;
+      &lt;select name="guests" required&gt;
+        &lt;option&gt;Pilih jumlah tamu&lt;/option&gt;
+        &lt;option value="1"&gt;1 Tamu&lt;/option&gt;
+        &lt;option value="2"&gt;2 Tamu&lt;/option&gt;
+        &lt;option value="3"&gt;3 Tamu&lt;/option&gt;
+        &lt;option value="4"&gt;4 Tamu&lt;/option&gt;
+        &lt;option value="5+"&gt;5+ Tamu&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- CATATAN KHUSUS --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label&gt;Catatan Khusus (opsional)&lt;/label&gt;
+      &lt;textarea name="notes" placeholder="Contoh: Ada alergi, hari jadi, dll" rows="4"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Kirim Reservasi ke WhatsApp&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+
+                <div class="warning">
+                    <strong>⚠️ PENTING NOMOR WHATSAPP:</strong> Edit nomor di <code>js/script.js</code> di fungsi <code>handleReservation()</code>:
+                    <pre><code>const whatsappPhone = '6285604030473';  // ← GANTI DI SINI!</code></pre>
+                </div>
+
+                <h2><span class="icon">4️⃣</span> FEATURES SECTION</h2>
+                <div class="edit-path">File: reservation.html (Baris 251-350)</div>
+                <p>Section yang menunjukkan keunggulan reservasi di tempat Anda.</p>
+
+                <p><strong>📝 Contoh:</strong></p>
+                <pre><code>&lt;section class="features"&gt;
+  &lt;h2&gt;Keunggulan Reservasi dengan Kami&lt;/h2&gt;
+  
+  &lt;div class="feature-item"&gt;
+    &lt;h3&gt;✅ Proses Cepat&lt;/h3&gt;
+    &lt;p&gt;Reservasi hanya butuh 2 menit saja&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="feature-item"&gt;
+    &lt;h3&gt;✅ Konfirmasi Instan&lt;/h3&gt;
+    &lt;p&gt;Dapat konfirmasi via WhatsApp segera&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">5️⃣</span> FAQ SECTION</h2>
+                <div class="edit-path">File: reservation.html (Baris 351-450)</div>
+                <p>FAQ (Frequently Asked Questions) tentang reservasi.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="faq"&gt;
+  &lt;h2&gt;Pertanyaan Umum&lt;/h2&gt;
+  
+  &lt;div class="faq-item"&gt;
+    &lt;h3&gt;Apakah bisa reservasi untuk grup besar?&lt;/h3&gt;
+    &lt;p&gt;Ya, silakan hubungi kami langsung untuk grup lebih dari 10 orang.&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="faq-item"&gt;
+    &lt;h3&gt;Berapa biaya reservasi?&lt;/h3&gt;
+    &lt;p&gt;Reservasi gratis! Anda hanya per bayar makanan dan minuman yang dipesan.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">6️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman lain.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> 
+                    <ul>
+                        <li>Form harus user-friendly dan cepat</li>
+                        <li>Selalu konfirm via WhatsApp untuk customer service</li>
+                        <li>Jangan lupa tanyakan tentang alergi atau catatan khusus</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FRANCHISE PAGE -->
+            <div id="franchise" class="page-content">
+                <div class="current-page-info">
+                    <p>📄 <strong>Halaman Aktif: Franchise (franchise.html)</strong> - Untuk menarik mitra bisnis dengan info requirements dan proses</p>
+                </div>
+                <h1>🏪 HALAMAN FRANCHISE (franchise.html)</h1>
+                <p>Halaman untuk menarik mitra bisnis yang ingin membuka cabang Mie Newmind. Menampilkan keuntungan dan proses franchising.</p>
+
+                <h2><span class="icon">1️⃣</span> NAVBAR</h2>
+                <p>Navbar standar.</p>
+
+                <h2><span class="icon">2️⃣</span> HERO SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 30-80)</div>
+                <pre><code>&lt;section class="hero"&gt;
+  &lt;h1&gt;Bergabung Sebagai Mitra Franchise&lt;/h1&gt;
+  &lt;p&gt;Wujudkan impian bisnis Anda bersama Mie Newmind&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">3️⃣</span> WHY FRANCHISE SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 81-200)</div>
+                <p>Alasan mengapa membuka franchise Mie Newmind.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="why-franchise"&gt;
+  &lt;h2&gt;Mengapa Memilih Mie Newmind?&lt;/h2&gt;
+  
+  &lt;div class="benefit-item"&gt;
+    &lt;h3&gt;🎯 Brand Terkenal&lt;/h3&gt;
+    &lt;p&gt;Brand Mie Newmind sudah dikenal di seluruh Indonesia dengan 50 ribu pelanggan setia...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="benefit-item"&gt;
+    &lt;h3&gt;💰 ROI Tinggi&lt;/h3&gt;
+    &lt;p&gt;Investasi Anda bisa balik dalam 18-24 bulan dengan profit margin yang baik...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="benefit-item"&gt;
+    &lt;h3&gt;📚 Training Lengkap&lt;/h3&gt;
+    &lt;p&gt;Kami memberikan training operasional, manajemen, dan marketing...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">4️⃣</span> REQUIREMENTS SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 201-300)</div>
+                <p>Syarat dan ketentuan untuk membuka franchise.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="requirements"&gt;
+  &lt;h2&gt;Syarat & Ketentuan Franchise&lt;/h2&gt;
+  
+  &lt;div class="req-category"&gt;
+    &lt;h3&gt;Investasi Awal&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Franchise Fee: Rp 50 juta&lt;/li&gt;
+      &lt;li&gt;Renovasi & Peralatan: Rp 150-200 juta&lt;/li&gt;
+      &lt;li&gt;Modal Kerja: Rp 30 juta&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Total: Rp 230-280 juta&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="req-category"&gt;
+    &lt;h3&gt;Kemampuan&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Passionate tentang bisnis F&B&lt;/li&gt;
+      &lt;li&gt;Memiliki pengalaman bisnis atau manajemen&lt;/li&gt;
+      &lt;li&gt;Memahami pasar lokal&lt;/li&gt;
+      &lt;li&gt;Siap ikuti training intensif&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="req-category"&gt;
+    &lt;h3&gt;Lokasi&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Minimal 50-70 m² untuk outlet stand-alone&lt;/li&gt;
+      &lt;li&gt;Lokasi trafficking tinggi atau dekat dengan pusat bisnis&lt;/li&gt;
+      &lt;li&gt;Tersedia parkir yang cukup&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">5️⃣</span> PROCESS SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 301-400)</div>
+                <p>Proses untuk menjadi franchisee.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="process"&gt;
+  &lt;h2&gt;Proses Menjadi Franchisee&lt;/h2&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;01. Inquiry&lt;/h3&gt;
+    &lt;p&gt;Isi form dan hubungi kami untuk mendiskusikan peluang franchise&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;02. Presentation&lt;/h3&gt;
+    &lt;p&gt;Tim franchise kami akan presentasi detail bisnis model dan ROI&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;03. Due Diligence&lt;/h3&gt;
+    &lt;p&gt;Kami melakukan survey lokasi dan feasibility check&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;04. Agreement&lt;/h3&gt;
+    &lt;p&gt;Tanda tangan franchise agreement dan pembayaran fee&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;05. Setup & Training&lt;/h3&gt;
+    &lt;p&gt;Renovasi, pemasangan branding, dan training tim Anda&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="process-step"&gt;
+    &lt;h3&gt;06. Grand Opening&lt;/h3&gt;
+    &lt;p&gt;Soft opening dan grand opening dengan support marketing dari pusat&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">6️⃣</span> CONTACT FORM SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 401-550)</div>
+                <p>Form untuk calon franchisee menghubungi perusahaan.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="contact-form-section"&gt;
+  &lt;h2&gt;Hubungi Tim Franchise Kami&lt;/h2&gt;
+  
+  &lt;form id="franchiseForm" onsubmit="handleFranchiseInquiry(event)"&gt;
+    &lt;input type="text" name="name" placeholder="Nama Lengkap" required&gt;
+    &lt;input type="email" name="email" placeholder="Email" required&gt;
+    &lt;input type="tel" name="phone" placeholder="Nomor HP" required&gt;
+    
+    &lt;input type="text" name="location" placeholder="Lokasi yang dituju" required&gt;
+    
+    &lt;select name="experience" required&gt;
+      &lt;option&gt;Pengalaman Bisnis&lt;/option&gt;
+      &lt;option&gt;Pemula&lt;/option&gt;
+      &lt;option&gt;1-5 tahun&lt;/option&gt;
+      &lt;option&gt;5+ tahun&lt;/option&gt;
+    &lt;/select&gt;
+    
+    &lt;textarea name="message" placeholder="Pertanyaan atau catatan..." rows="5"&gt;&lt;/textarea&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Kirim Inquiry&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">7️⃣</span> FAQ SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 551-650)</div>
+                <p>FAQ tentang franchise.</p>
+
+                <h2><span class="icon">8️⃣</span> TESTIMONIALS SECTION</h2>
+                <div class="edit-path">File: franchise.html (Baris 651-750)</div>
+                <p>Testimoni dari franchisee yang sudah sukses.</p>
+
+                <p><strong>📝 Struktur:</strong></p>
+                <pre><code>&lt;section class="testimonials"&gt;
+  &lt;h2&gt;Testimoni Franchisee Kami&lt;/h2&gt;
+  
+  &lt;div class="testimonial-card"&gt;
+    &lt;p class="quote"&gt;"Bergabung dengan Mie Newmind adalah keputusan terbaik saya. Dalam setahun pertama sudah balik modal!"&lt;/p&gt;
+    &lt;p class="author"&gt;- Budi Santoso, Franchisee Jakarta&lt;/p&gt;
+    &lt;div class="rating"&gt;⭐⭐⭐⭐⭐&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2><span class="icon">9️⃣</span> FOOTER</h2>
+                <p>Sama seperti halaman lain.</p>
+
+                <div class="info">
+                    <strong>💡 Tips:</strong> 
+                    <ul>
+                        <li>Halaman franchise harus profesional dan detail</li>
+                        <li>Transparansi data investasi sangat penting</li>
+                        <li>Tunjukkan success stories dari franchisee lain</li>
+                        <li>Respon cepat terhadap inquiry prospek</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📖 Panduan lengkap edit setiap halaman website Mie Newmind</p>
+            <p>&copy; 2024 Mie Newmind Documentation</p>
+            <p><a href="index.html" style="color: inherit; text-decoration: underline;">← Kembali ke Panduan Utama</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Page switching
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                
+                // Remove active from all buttons and sections
+                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.page-content').forEach(s => s.classList.remove('active'));
+                
+                // Add active to clicked button and corresponding section
+                this.classList.add('active');
+                const section = document.getElementById(page);
+                if (section) {
+                    section.classList.add('active');
+                    // Scroll to content area for better UX
+                    const contentArea = document.querySelector('.content-area');
+                    if (contentArea) {
+                        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Highlight code blocks
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+</body>
+</html>

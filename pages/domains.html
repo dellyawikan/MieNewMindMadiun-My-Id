@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domains - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><h2>Mie Newmind</h2></div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item"><span class="menu-icon">▌</span> Dashboard</a>
+                <a href="domains.html" class="menu-item active"><span class="menu-icon">▌</span> Domains</a>
+                <a href="dns-management.html" class="menu-item"><span class="menu-icon">▌</span> DNS Management</a>
+                <a href="hosting.html" class="menu-item"><span class="menu-icon">▌</span> Hosting</a>
+                <a href="ssl-tls.html" class="menu-item"><span class="menu-icon">▌</span> SSL/TLS</a>
+                <a href="analytics.html" class="menu-item"><span class="menu-icon">▌</span> Analytics</a>
+                <a href="billing.html" class="menu-item"><span class="menu-icon">▌</span> Billing</a>
+                <a href="settings.html" class="menu-item"><span class="menu-icon">▌</span> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">Domains</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>Your Domains</h1>
+                    <p>Manage all registered domains</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Active Domains</h2></div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Domain</th>
+                                    <th>Registration Date</th>
+                                    <th>Expires</th>
+                                    <th>Registrar</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>newmindmadiun.my.id</strong></td>
+                                    <td>March 15, 2026</td>
+                                    <td>March 15, 2027</td>
+                                    <td>IndonesiaDomains.id</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>newmindmadiun.pages.dev</strong></td>
+                                    <td>February 1, 2026</td>
+                                    <td>Permanent</td>
+                                    <td>Cloudflare Pages</td>
+                                    <td><span class="badge badge-active pulse">ACTIVE</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Domain Information</h2></div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Primary Domain</div>
+                            <div class="info-value">newmindmadiun.my.id</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Subdomain</div>
+                            <div class="info-value">www.newmindmadiun.my.id</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Status</div>
+                            <div class="info-value" style="color: #52b788;">Active</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Days Until Expiry</div>
+                            <div class="info-value">349 Days</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Quick Actions</h2></div>
+                    <div class="button-grid">
+                        <button class="btn btn-primary">Renew Domain</button>
+                        <button class="btn btn-secondary">Update WHOIS</button>
+                        <button class="btn btn-secondary">Domain Settings</button>
+                        <button class="btn btn-secondary">Transfer Domain</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

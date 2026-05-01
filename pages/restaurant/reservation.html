@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <!-- Status handled by Cloudflare Worker (server-side) -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservasi - Mie Newmind</title>
+    <meta
+      name="description"
+      content="Halaman reservasi Mie Newmind untuk memesan tempat makan lebih nyaman."
+    />
+    <link
+      rel="icon"
+      href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69ae4577577ae96633cb29e3/5d30e9f3e_logo.png"
+      type="image/png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="../../index.html" aria-label="Mie Newmind">
+          <img class="brand-logo" src="../../assets/logo/logo.png" alt="Mie Newmind" />
+        </a>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+        <nav class="main-nav" id="main-nav">
+          <a href="about.html">About Us</a>
+          <a href="menu.html">Menu</a>
+          <a href="location.html">Lokasi</a>
+          <a href="reservation.html">Reservasi</a>
+          <a href="franchise.html">Franchise</a>
+          <a href="karir.html">Karir</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="lang-pill" type="button" aria-label="Ganti bahasa">EN</button>
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">◐</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-title-wrap reservation-page-hero">
+        <div class="container">
+          <article class="page-title-card reveal">
+            <p class="eyebrow">BOOK A TABLE</p>
+            <h1>Reservasi</h1>
+            <p>Pesan tempat lebih awal agar momen makanmu di Mie Newmind berjalan nyaman dan tanpa antre.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="lokasi" id="reservasi">
+        <div class="container">
+          <div class="visit-head">
+            <p class="eyebrow">VISIT US</p>
+            <h2 class="visit-title">Lokasi &amp; <span>Reservasi</span></h2>
+          </div>
+
+          <div class="visit-grid" style="grid-template-columns: minmax(0, 1fr);">
+            <article class="visit-card reserve-card">
+              <div class="visit-icon visit-icon-reserve" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 16.5V19.5C20 19.9 19.84 20.28 19.56 20.56C19.28 20.84 18.9 21 18.5 21C14.52 20.76 10.76 19.08 7.95 16.27C5.14 13.46 3.46 9.7 3.22 5.72C3.2 5.32 3.34 4.94 3.62 4.66C3.9 4.38 4.28 4.22 4.68 4.2H7.68C8.4 4.19 9.03 4.71 9.16 5.42C9.28 6.13 9.49 6.82 9.8 7.48C10 7.92 9.9 8.43 9.55 8.77L8.28 10.05C9.2 11.67 10.53 13 12.15 13.92L13.43 12.65C13.77 12.3 14.28 12.2 14.72 12.4C15.38 12.71 16.07 12.92 16.78 13.04C17.49 13.17 18.01 13.8 18 14.52V16.5H20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Reservasi</h3>
+              <p>
+                Ingin makan tanpa khawatir kehabisan tempat? Isi form reservasi berikut,
+                tim kami akan menghubungi Anda untuk konfirmasi.
+              </p>
+
+              <h4 class="reservation-form-heading">Isi Form Reservasi</h4>
+
+              <form class="application-form" id="reservation-form" style="margin-top: 1rem;">
+                <div class="form-group form-group-full">
+                  <input type="text" name="fullname" placeholder="Nama Lengkap" required class="form-input" />
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" name="date" placeholder="Tanggal Reservasi" required class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="time" placeholder="Jam Reservasi" required class="form-input" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="number" name="pax" placeholder="Jumlah Orang" required class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="phone" placeholder="No. Telepon" required class="form-input" />
+                  </div>
+                </div>
+                <div class="form-group form-group-full">
+                  <textarea name="notes" placeholder="Catatan Tambahan" rows="4" class="form-input form-textarea"></textarea>
+                </div>
+                <button type="button" class="btn btn-secondary btn-submit" onclick="handleReservationWhatsApp(event)">
+                  <i class="bi bi-whatsapp"></i> Hubungi Via WhatsApp
+                </button>
+              </form>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-col footer-brand">
+          <img src="../../assets/logo/logo.png" alt="Mie Newmind" class="footer-logo" />
+          <p class="footer-description">Mie pedas kekinian dengan harga yang ramah di kantong. Hadir untuk menemani setiap momen makanmu.</p>
+          <div class="socials">
+            <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer" aria-label="Instagram" class="social-ig" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer" aria-label="TikTok" class="social-tiktok" title="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer" aria-label="WhatsApp" class="social-wa" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://gofood.link/a/MVgE9r3" target="_blank" rel="noreferrer" aria-label="GOJEK" class="social-gojek" title="GOJEK"><img src="../../assets/logo/gojek.png" alt="GOJEK" /></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>BROWSE</h4>
+          <a href="about.html">About Us</a>
+          <a href="menu.html">Menu</a>
+          <a href="location.html">Lokasi</a>
+          <a href="reservation.html">Reservasi</a>
+          <a href="franchise.html">Franchise</a>
+          <a href="karir.html">Karir</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>KONTAK</h4>
+          <div class="footer-contact-item"><p class="footer-label">WHATSAPP</p><a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer">085604030473</a></div>
+          <div class="footer-contact-item"><p class="footer-label">INSTAGRAM</p><a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer">@mienewmind</a></div>
+          <div class="footer-contact-item"><p class="footer-label">TIKTOK</p><a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer">@mienewmind</a></div>
+        </div>
+
+        <div class="footer-col">
+          <h4>ALAMAT</h4>
+          <p class="footer-address">Jl. Garon Raya, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur 63451</p>
+          <div class="footer-hours">
+            <p class="footer-label">JAM OPERASIONAL</p>
+            <p class="footer-time">Senin - Jum'at: 09.00 - 22.00 WIB</p>
+            <p class="footer-time">Sabtu - Minggu: 09.00 - 23.00 WIB</p>
+            <p class="footer-status"><span class="status-dot"></span>Buka</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Mie Newmind. All Rights Reserved.</p>
+        <div class="footer-badges">
+          <span class="badge-verified">Terverifikasi</span>
+          <a href="#" class="badge-halal">
+            <span class="halal-symbol">حلال</span>
+            <span class="halal-label">Halal</span>
+          </a>
+          <span class="badge-bpom">BPOM RI</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+  </body>
+</html>

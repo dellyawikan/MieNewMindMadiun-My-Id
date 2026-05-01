@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing - Mie Newmind Panel</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><h2>Mie Newmind</h2></div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item"><span class="menu-icon">▌</span> Dashboard</a>
+                <a href="domains.html" class="menu-item"><span class="menu-icon">▌</span> Domains</a>
+                <a href="dns-management.html" class="menu-item"><span class="menu-icon">▌</span> DNS Management</a>
+                <a href="hosting.html" class="menu-item"><span class="menu-icon">▌</span> Hosting</a>
+                <a href="ssl-tls.html" class="menu-item"><span class="menu-icon">▌</span> SSL/TLS</a>
+                <a href="analytics.html" class="menu-item"><span class="menu-icon">▌</span> Analytics</a>
+                <a href="billing.html" class="menu-item active"><span class="menu-icon">▌</span> Billing</a>
+                <a href="settings.html" class="menu-item"><span class="menu-icon">▌</span> Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="navbar-title">Billing</div>
+                <div class="navbar-user">Admin Account • newmindmadiun.my.id</div>
+            </header>
+
+            <div class="content page-fade-in">
+                <div class="page-header">
+                    <h1>Billing & Invoices</h1>
+                    <p>Manage your subscription and payment information</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Plan Type</div>
+                        <div class="stat-value">Free</div>
+                        <div class="stat-subtext">Cloudflare Pages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Monthly Cost</div>
+                        <div class="stat-value">Rp 0</div>
+                        <div class="stat-subtext">Always free</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Status</div>
+                        <div class="stat-value" style="color: #52b788;">Active</div>
+                        <div class="stat-subtext">No charges</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Next Billing</div>
+                        <div class="stat-value">N/A</div>
+                        <div class="stat-subtext">Permanent free</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Current Plan</h2></div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Plan</div>
+                            <div class="info-value">Cloudflare Pages Free</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Billing Cycle</div>
+                            <div class="info-value">Monthly</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Builds/Month</div>
+                            <div class="info-value">500</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Custom Domains</div>
+                            <div class="info-value">Unlimited</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-secondary">View Plan Details</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Recent Invoices</h2></div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#INV-2026-001</td>
+                                    <td>April 11, 2026</td>
+                                    <td>Rp 0</td>
+                                    <td><span class="badge badge-active pulse">PAID</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#INV-2026-002</td>
+                                    <td>April 1, 2026</td>
+                                    <td>Rp 0</td>
+                                    <td><span class="badge badge-active pulse">PAID</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><h2>Actions</h2></div>
+                    <div class="button-grid">
+                        <button class="btn btn-secondary">Download Invoices</button>
+                        <button class="btn btn-secondary">Update Payment Method</button>
+                        <button class="btn btn-secondary">Contact Billing</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

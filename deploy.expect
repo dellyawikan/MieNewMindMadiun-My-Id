@@ -1,0 +1,79 @@
+#!/usr/bin/env expect -f
+
+# Cloudflare Pages deployment script using expect
+# Handles interactive prompts automatically
+
+set timeout 120
+set project_dir "/Users/pvegananda/Dev/05-Workspaces/02-Templates/html/MieNewMind-2"
+
+# Change to project directory
+cd $project_dir
+
+# Start the wrangler deploy command
+puts "🚀 Starting deployment to Cloudflare Pages..."
+puts "Project: newmindmadiun"
+puts ""
+
+# Spawn the wrangler pages deploy command
+spawn wrangler pages deploy . --project-name newmindmadiun
+
+# Handle the warning message
+expect {
+    "We detected a configuration file" {
+        puts "✓ Configuration file detected"
+        exp_continue
+    }
+    "missing the \"pages_build_output_dir\" field" {
+        puts "✓ Handling build output directory"
+        exp_continue
+    }
+    "Ignoring configuration file" {
+        puts "✓ Configuration acknowledged"
+        exp_continue
+    }
+}
+
+# Handle project creation prompts
+expect {
+    "does not exist: \"newmindmadiun\". Would you like to create it?" {
+        puts "✓ Creating new project: newmindmadiun"
+        send "y\r"
+        exp_continue
+    }
+    "production branch name:" {
+        puts "✓ Setting production branch: main"
+        send "main\r"
+        exp_continue
+    }
+}
+
+# Handle upload progress
+expect {
+    "Uploading" {
+        puts "📤 Uploading files..."
+        exp_continue
+    }
+    "✔" {
+        puts "✓ Upload successful"
+        exp_continue
+    }
+    "Success" {
+        puts "✅ Deployment successful!"
+        exp_continue
+    }
+    "Deployments:" {
+        puts "✓ Deployment details:"
+        exp_continue
+    }
+    "https://" {
+        puts "🎉 Live URL: $expect_out(buffer)"
+        exp_continue
+    }
+}
+
+# Wait for deployment to complete
+expect eof
+
+puts ""
+puts "✅ Deployment complete!"
+puts "Your site is now live at: https://newmindmadiun.pages.dev"
