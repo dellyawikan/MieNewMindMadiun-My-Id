@@ -483,19 +483,77 @@ if (menuGrid) {
   });
 }
 
-if (menuModal) {
+  /* ============================================
+   MENU MODAL NAVIGATION FUNCTIONS
+   ============================================ */
+
+function navigateMenuModal(direction) {
+  if (modalCategory === null || modalIndex === null) return;
+
+  const menuData = getMenuData();
+  const categoryItems = menuData[modalCategory];
+  if (!categoryItems) return;
+
+  let newIndex = modalIndex + (direction === 'next' ? 1 : -1);
+
+  // Wrap around: go to last item if navigating backward from first, or first if forward from last
+  if (newIndex < 0) {
+    newIndex = categoryItems.length - 1;
+  } else if (newIndex >= categoryItems.length) {
+    newIndex = 0;
+  }
+
+  // Update modal with new item
+  openMenuModal(modalCategory, newIndex);
+}
+
+function updateNavigationButtonState() {
+  const prevBtn = document.querySelector('#menu-modal-nav-prev');
+  const nextBtn = document.querySelector('#menu-modal-nav-next');
+
+  if (!prevBtn || !nextBtn || modalCategory === null || modalIndex === null) return;
+
+  const menuData = getMenuData();
+  const categoryItems = menuData[modalCategory];
+  if (!categoryItems) return;
+
+  // Enable/disable buttons based on position (optional - users can wrap around)
+  // Currently allowing wrap-around navigation, so buttons always enabled
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+};
+
+if (menuModal) 
   menuModal.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
     if (target.matches('[data-menu-close]')) closeMenuModal();
-  });
 
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMenuModal();
+    // Handle navigation button clicks
+    if (target.matches('#menu-modal-nav-prev')) {
+    navigateMenuModal('prev');
+    } else if (target.matches('#menu-modal-nav-next')) {
+    navigateMenuModal('next');
+   }
   });
-}
 
 window.addEventListener('mie:language-change', (event) => {
-  const nextLang = event.detail && event.detail.lang ? event.detail.lang : 'id';
-  setMenuLanguage(nextLang);
-});
+   if (event.key === 'Escape') {
+    closeMenuModal();
+    } else if (event.key === 'ArrowLeft' && menuModal.classList.contains('is-open')) {
+    event.preventDefault();
+    navigateMenuModal('prev');
+    } else if (event.key === 'ArrowRight' && menuModal.classList.contains('is-open')) {
+    event.preventDefault();
+    navigateMenuModal('next');
+    }
+  });
+
+   // Update button state when modal is opened
+  const originalOpenMenuModal = openMenuModal;
+  openMenuModal = function(category, index) {
+    originalOpenMenuModal.call(this, category, index);
+    window.requestAnimationFrame(() => {
+      updateNavigationButtonState();
+    });
+  };
