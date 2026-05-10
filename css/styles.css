@@ -4260,3 +4260,630 @@ body.theme-dark .security-check-item {
     max-width: 90%;
   }
 }
+
+/* ======================================
+   GOFOOD SECTION
+====================================== */
+
+.gofood-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #160018 0%,
+      #2b0030 45%,
+      #120014 100%
+    );
+
+  color: white;
+}
+
+/* GRID BACKGROUND */
+
+.gofood-overlay {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+
+  opacity: 0.3;
+}
+
+/* HEADER */
+
+.gofood-header {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff00b8,
+      #ff4d7a
+    );
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  margin-bottom: 20px;
+}
+
+.gofood-title {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.gofood-title span {
+  color: #ff2db2;
+}
+
+/* MAIN BOX */
+
+.gofood-box {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+
+  align-items: center;
+
+  padding: 50px;
+
+  border-radius: 36px;
+
+  background:
+    rgba(15, 5, 25, 0.88);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 80px rgba(255, 0, 180, 0.08);
+}
+
+/* IMAGE */
+
+.gofood-image {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+
+/* glow overlay */
+
+.gofood-image::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 0, 150, 0.18),
+      transparent 70%
+    );
+
+  z-index: 1;
+}
+
+/* blend overlay */
+
+.gofood-image::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(20, 0, 30, 0) 50%,
+      rgba(20, 0, 30, 0.92) 100%
+    );
+
+  z-index: 2;
+}
+
+.gofood-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 28px;
+
+  transform: scale(1.02);
+
+  filter:
+    brightness(0.92)
+    contrast(1.08);
+
+  transition: 0.5s ease;
+
+  /* super smooth blend */
+
+  mask-image:
+    linear-gradient(
+      to right,
+      black 78%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      black 78%,
+      transparent 100%
+    );
+}
+
+.gofood-image:hover img {
+  transform: scale(1.05);
+}
+
+/* CONTENT */
+
+.gofood-content h3 {
+  font-size: 58px;
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  margin-bottom: 24px;
+}
+
+.gofood-content p {
+  font-size: 20px;
+  line-height: 1.9;
+
+  color:
+    rgba(255,255,255,0.75);
+
+  margin-bottom: 35px;
+}
+
+/* BUTTON */
+
+.gofood-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px 38px;
+
+  border-radius: 18px;
+
+  text-decoration: none;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff00b8,
+      #ff3366
+    );
+
+  box-shadow:
+    0 10px 40px rgba(255, 0, 150, 0.25);
+
+  transition: 0.35s ease;
+}
+
+.gofood-btn:hover {
+  transform:
+    translateY(-4px)
+    scale(1.02);
+
+  box-shadow:
+    0 18px 50px rgba(255, 0, 150, 0.35);
+}
+
+/* MOBILE */
+
+@media (max-width: 992px) {
+
+  .gofood-box {
+    grid-template-columns: 1fr;
+    padding: 35px;
+  }
+
+  .gofood-content h3 {
+    font-size: 42px;
+  }
+
+  .gofood-title {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .gofood-section {
+    padding: 80px 0;
+  }
+
+  .gofood-box {
+    gap: 30px;
+    padding: 25px;
+    border-radius: 24px;
+  }
+
+  .gofood-title {
+    font-size: 38px;
+  }
+
+  .gofood-content h3 {
+    font-size: 32px;
+  }
+
+  .gofood-content p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .gofood-btn {
+    width: 100%;
+  }
+
+  .gofood-image img {
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black 80%,
+        transparent 100%
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black 80%,
+        transparent 100%
+      );
+  }
+
+  .gofood-image::after {
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(20,0,30,0) 60%,
+        rgba(20,0,30,0.95) 100%
+      );
+  }
+}
+
+/* ======================================
+   FAQ SECTION
+====================================== */
+
+.faq {
+  padding: 90px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* LINE PATTERN BACKGROUND */
+.faq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(180, 33, 124, 0.06) 0px,
+      rgba(180, 33, 124, 0.06) 2px,
+      transparent 2px,
+      transparent 28px
+    );
+
+  pointer-events: none;
+}
+
+/* DARK MODE PATTERN */
+body.theme-dark .faq::before {
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 173, 222, 0.05) 0px,
+      rgba(255, 173, 222, 0.05) 2px,
+      transparent 2px,
+      transparent 28px
+    );
+}
+
+.faq .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* JUDUL FAQ */
+.faq h2 {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 45px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+/* ======================================
+   FAQ SECTION
+====================================== */
+
+.faq {
+  padding: 90px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* ======================================
+   BACKGROUND CORAK GARIS
+====================================== */
+
+.faq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(180, 33, 124, 0.07) 0px,
+      rgba(180, 33, 124, 0.07) 2px,
+      transparent 2px,
+      transparent 28px
+    );
+
+  pointer-events: none;
+}
+
+/* DARK MODE CORAK */
+body.theme-dark .faq::before {
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 173, 222, 0.06) 0px,
+      rgba(255, 173, 222, 0.06) 2px,
+      transparent 2px,
+      transparent 28px
+    );
+}
+
+.faq .container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ======================================
+   JUDUL FAQ
+====================================== */
+
+.faq h2 {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 45px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+/* ======================================
+   FAQ BOX
+====================================== */
+
+.faq-item {
+  padding: 16px 18px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(14px);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.faq-item:hover {
+  transform: translateY(-4px);
+}
+
+/* GLOW */
+.faq-item::before {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: -50px;
+  right: -50px;
+  border-radius: 50%;
+  filter: blur(45px);
+  opacity: 0.22;
+}
+
+/* PERTANYAAN */
+.faq-item h3 {
+  font-size: 1.45rem;
+  margin-bottom: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+/* JAWABAN */
+.faq-item p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+/* ======================================
+   LIGHT MODE
+====================================== */
+
+body:not(.theme-dark) .faq {
+
+  /* GRADIENT BACKGROUND */
+  background:
+    radial-gradient(circle at top left, #ffadde 0%, transparent 30%),
+    radial-gradient(circle at bottom right, #ffe550 0%, transparent 28%),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #fff6fb 45%,
+      #fffde7 100%
+    );
+}
+
+body:not(.theme-dark) .faq h2 {
+  color: #b4217c;
+}
+
+body:not(.theme-dark) .faq-item {
+
+  /* GLASS EFFECT */
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.88),
+    rgba(255,255,255,0.72)
+  );
+
+  border: 1px solid rgba(180, 33, 124, 0.12);
+
+  box-shadow:
+    0 8px 24px rgba(180, 33, 124, 0.06),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+body:not(.theme-dark) .faq-item::before {
+  background: linear-gradient(
+    135deg,
+    #ffadde,
+    #ffe550
+  );
+}
+
+body:not(.theme-dark) .faq-item h3 {
+  color: #b4217c;
+}
+
+body:not(.theme-dark) .faq-item p {
+  color: #2d2d2d;
+}
+
+/* ======================================
+   DARK MODE
+====================================== */
+
+body.theme-dark .faq {
+
+  /* DARK GRADIENT */
+  background:
+    radial-gradient(circle at top left, rgba(180,33,124,0.28) 0%, transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,229,80,0.12) 0%, transparent 28%),
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #111111 45%,
+      #1a1a1a 100%
+    );
+}
+
+body.theme-dark .faq h2 {
+  color: #ffe550;
+}
+
+body.theme-dark .faq-item {
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.07),
+    rgba(255,255,255,0.03)
+  );
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+body.theme-dark .faq-item::before {
+  background: linear-gradient(
+    135deg,
+    #b4217c,
+    #ffadde
+  );
+}
+
+body.theme-dark .faq-item h3 {
+  color: #ffadde;
+}
+
+body.theme-dark .faq-item p {
+  color: rgba(255,255,255,0.82);
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 768px) {
+
+  .faq {
+    padding: 70px 16px;
+  }
+
+  .faq h2 {
+    font-size: 2.8rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.15rem;
+  }
+
+  .faq-item p {
+    font-size: 0.96rem;
+  }
+
+}
