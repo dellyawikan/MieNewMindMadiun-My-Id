@@ -4267,36 +4267,60 @@ body.theme-dark .security-check-item {
 
 .gofood-section {
   position: relative;
-  padding: 100px 0;
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      135deg,
-      #160018 0%,
-      #2b0030 45%,
-      #120014 100%
-    );
-
+  padding: 80px 60px;
+  overflow: visible;
+  min-height: auto;
+  background: transparent;
+  
   color: white;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* GRID BACKGROUND */
-
+/* OVERLAY - Card background (hidden) */
 .gofood-overlay {
   position: absolute;
   inset: 0;
-
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-
-  background-size: 40px 40px;
-
-  opacity: 0.3;
+  background: transparent;
+  opacity: 0;
+  z-index: 0;
+  display: none;
 }
 
-/* HEADER */
+/* Light mode */
+body:not(.theme-dark) .gofood-overlay {
+  display: none;
+}
+
+/* OUTER CONTENT WRAPPER - Card Container */
+
+.gofood-section > .gofood-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 45px 50px;
+  border-radius: 35px;
+  background: #120018;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+body:not(.theme-dark) .gofood-section > .gofood-content {
+  background: #f5f0f8;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADER - EYEBROW & TITLE */
+
+.gofood-text {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+}
 
 .gofood-header {
   position: relative;
@@ -4304,6 +4328,9 @@ body.theme-dark .security-check-item {
 
   text-align: center;
   margin-bottom: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .eyebrow {
@@ -4325,149 +4352,178 @@ body.theme-dark .security-check-item {
   letter-spacing: 1px;
 
   margin-bottom: 20px;
+  
+  /* Efek glow lembut */
+  box-shadow: 0 0 20px rgba(255, 0, 184, 0.4);
+  transition: all 0.3s ease;
+}
+
+.eyebrow:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 184, 0.6);
+}
+
+/* Light mode eyebrow */
+body:not(.theme-dark) .eyebrow {
+  background: linear-gradient(90deg, #d1006d, #ff4d7a);
+  box-shadow: 0 0 15px rgba(209, 0, 109, 0.3);
+}
+
+body:not(.theme-dark) .eyebrow:hover {
+  box-shadow: 0 0 25px rgba(209, 0, 109, 0.5);
 }
 
 .gofood-title {
-  font-size: 64px;
+  font-size: 65px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: white;
+  margin: 0;
+}
+
+body:not(.theme-dark) .gofood-title {
+  color: #1a0a2e;
+  text-shadow: 0 2px 6px rgba(100, 50, 100, 0.1);
 }
 
 .gofood-title span {
   color: #ff2db2;
+  /* Efek glow pada teks pink */
+  text-shadow: 0 0 10px rgba(255, 45, 178, 0.4);
 }
 
-/* MAIN BOX */
+/* Light mode title span tetap pink dengan kontras baik */
+body:not(.theme-dark) .gofood-title span {
+  color: #c7319c;
+  text-shadow: 0 0 8px rgba(199, 49, 156, 0.25);
+}
+
+/* MAIN BOX - Flex container horizontal */
 
 .gofood-box {
   position: relative;
   z-index: 2;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  gap: 55px;
 
-  padding: 50px;
+  width: 100%;
 
-  border-radius: 36px;
+  padding: 0;
 
-  background:
-    rgba(15, 5, 25, 0.88);
+  border-radius: 0;
 
-  border:
-    1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  box-shadow: none;
 
-  backdrop-filter: blur(14px);
-
-  box-shadow:
-    0 0 80px rgba(255, 0, 180, 0.08);
+  transition: all 0.4s ease;
 }
 
-/* IMAGE */
+/* Light mode box styling */
+body:not(.theme-dark) .gofood-box {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* IMAGE - Visible card image */
 
 .gofood-image {
+  display: flex;
   position: relative;
   overflow: hidden;
-
-  border-radius: 28px;
+  width: 420px;
+  height: 290px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
 }
 
-/* glow overlay */
+.gofood-image:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+}
 
 .gofood-image::before {
   content: "";
-
   position: absolute;
   inset: 0;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(255, 0, 150, 0.18),
-      transparent 70%
-    );
-
+  background: transparent;
   z-index: 1;
+  transition: all 0.3s ease;
 }
-
-/* blend overlay */
 
 .gofood-image::after {
   content: "";
-
   position: absolute;
   inset: 0;
-
-  background:
-    linear-gradient(
-      to right,
-      rgba(20, 0, 30, 0) 50%,
-      rgba(20, 0, 30, 0.92) 100%
-    );
-
+  background: transparent;
   z-index: 2;
+  transition: all 0.3s ease;
+}
+
+body:not(.theme-dark) .gofood-image::after {
+  background: transparent;
 }
 
 .gofood-image img {
   width: 100%;
   height: 100%;
-
   display: block;
-
   object-fit: cover;
-
-  border-radius: 28px;
-
-  transform: scale(1.02);
-
-  filter:
-    brightness(0.92)
-    contrast(1.08);
-
-  transition: 0.5s ease;
-
-  /* super smooth blend */
-
-  mask-image:
-    linear-gradient(
-      to right,
-      black 78%,
-      transparent 100%
-    );
-
-  -webkit-mask-image:
-    linear-gradient(
-      to right,
-      black 78%,
-      transparent 100%
-    );
+  border-radius: 25px;
+  transform: scale(1);
+  filter: brightness(1) contrast(1);
+  transition: 0.4s ease;
 }
 
 .gofood-image:hover img {
   transform: scale(1.05);
+  filter: brightness(1.05) contrast(1.05);
 }
 
-/* CONTENT */
+/* CONTENT - Text content inside card */
 
-.gofood-content h3 {
-  font-size: 58px;
+.gofood-box > .gofood-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gofood-box > .gofood-content h3 {
+  font-size: 40px;
   font-weight: 800;
-
-  line-height: 1.1;
-
-  margin-bottom: 24px;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
 }
 
-.gofood-content p {
+body:not(.theme-dark) .gofood-box > .gofood-content h3 {
+  color: #1a0a2e;
+  text-shadow: 0 2px 6px rgba(100, 50, 100, 0.1);
+}
+
+.gofood-box > .gofood-content p {
   font-size: 20px;
-  line-height: 1.9;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 30px 0;
+  transition: all 0.4s ease;
+}
 
-  color:
-    rgba(255,255,255,0.75);
-
-  margin-bottom: 35px;
+body:not(.theme-dark) .gofood-box > .gofood-content p {
+  color: rgba(40, 20, 60, 0.85);
 }
 
 /* BUTTON */
@@ -4476,29 +4532,61 @@ body.theme-dark .security-check-item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  padding: 20px 38px;
-
-  border-radius: 18px;
-
+  padding: 18px 36px;
+  border-radius: 16px;
   text-decoration: none;
-
   color: white;
-
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ff00b8,
-      #ff3366
-    );
-
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #ff00b8 0%, #ff3366 100%);
   box-shadow:
-    0 10px 40px rgba(255, 0, 150, 0.25);
+    0 12px 40px rgba(255, 0, 150, 0.35),
+    0 0 25px rgba(255, 0, 180, 0.25);
+  transition: all 0.35s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+}
 
-  transition: 0.35s ease;
+/* Efek glow pada button */
+.gofood-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.gofood-btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 0, 180, 0.3),
+    transparent
+  );
+  opacity: 0;
+  z-index: 0;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .gofood-btn:hover {
@@ -4507,81 +4595,129 @@ body.theme-dark .security-check-item {
     scale(1.02);
 
   box-shadow:
-    0 18px 50px rgba(255, 0, 150, 0.35);
+    0 18px 50px rgba(255, 0, 150, 0.45),
+    0 0 30px rgba(255, 0, 180, 0.35),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.gofood-btn:active {
+  transform:
+    translateY(-2px)
+    scale(0.98);
 }
 
 /* MOBILE */
 
 @media (max-width: 992px) {
 
-  .gofood-box {
-    grid-template-columns: 1fr;
-    padding: 35px;
+  .gofood-section {
+    padding: 70px 40px;
   }
 
-  .gofood-content h3 {
-    font-size: 42px;
+  .gofood-section > .gofood-content {
+    padding: 40px 45px;
+  }
+
+  .gofood-box {
+    gap: 45px;
+  }
+
+  .gofood-image {
+    width: 380px;
+    height: 270px;
+  }
+
+  .gofood-box > .gofood-content h3 {
+    font-size: 36px;
   }
 
   .gofood-title {
-    font-size: 48px;
+    font-size: 56px;
   }
 }
 
 @media (max-width: 768px) {
 
   .gofood-section {
-    padding: 80px 0;
+    padding: 60px 25px;
+  }
+
+  .gofood-section > .gofood-content {
+    padding: 35px 30px;
   }
 
   .gofood-box {
-    gap: 30px;
-    padding: 25px;
-    border-radius: 24px;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .gofood-image {
+    width: 100%;
+    height: 280px;
   }
 
   .gofood-title {
-    font-size: 38px;
+    font-size: 44px;
   }
 
-  .gofood-content h3 {
+  .gofood-box > .gofood-content h3 {
     font-size: 32px;
   }
 
-  .gofood-content p {
-    font-size: 16px;
-    line-height: 1.8;
+  .gofood-box > .gofood-content p {
+    font-size: 18px;
+    line-height: 1.7;
   }
 
   .gofood-btn {
+    padding: 16px 28px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  .gofood-section {
+    padding: 50px 15px;
+  }
+
+  .gofood-section > .gofood-content {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .gofood-box {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .gofood-image {
     width: 100%;
+    height: 240px;
   }
 
-  .gofood-image img {
-
-    mask-image:
-      linear-gradient(
-        to bottom,
-        black 80%,
-        transparent 100%
-      );
-
-    -webkit-mask-image:
-      linear-gradient(
-        to bottom,
-        black 80%,
-        transparent 100%
-      );
+  .gofood-title {
+    font-size: 32px;
   }
 
-  .gofood-image::after {
+  .gofood-box > .gofood-content h3 {
+    font-size: 26px;
+  }
 
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(20,0,30,0) 60%,
-        rgba(20,0,30,0.95) 100%
-      );
+  .gofood-box > .gofood-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .gofood-btn {
+    padding: 14px 24px;
+    font-size: 12px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    padding: 8px 14px;
   }
 }
 
