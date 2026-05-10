@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <!-- Apply saved theme immediately to prevent flash -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('mie-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('theme-dark');
+                document.body.classList.add('theme-dark');
+            }
+        })();
+    </script>
+    
+    <title>FAQ - Tanya Jawab Mie Newmind | Mie Pedas Kekinian</title>
+    <meta name="title" content="FAQ - Tanya Jawab Mie Newmind | Mie Pedas Kekinian" />
+    <meta name="description" content="Dapatkan jawaban atas pertanyaan umum tentang Mie Newmind. Pelajari apa yang membuat kami berbeda, menu rekomendasi, konsep brand, dan banyak lagi." />
+    <meta name="keywords" content="FAQ Mie Newmind, tanya jawab mie pedas, Mie Newmind Madiun, konsep mie newmind" />
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mienewmind.pages.dev/pages/restaurant/faq.html" />
+    <meta property="og:title" content="FAQ - Tanya Jawab Mie Newmind" />
+    <meta property="og:description" content="Dapatkan jawaban lengkap tentang Mie Newmind - dari filosofi brand hingga rekomendasi menu." />
+    
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#c7319c" />
+    
+    <link rel="icon" href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69ae4577577ae96633cb29e3/5d30e9f3e_logo.png" type="image/png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <style>
+        /* FAQ Page Styles */
+        .faq-header {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 54%, var(--brick) 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 66px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.theme-dark .faq-header {
+            background: linear-gradient(180deg, #7d1d67 0%, #5f144c 54%, #613d47 100%);
+        }
+
+        .faq-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .faq-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-header h1 {
+            color: #ffffff;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 900;
+            margin: 0 0 15px;
+        }
+
+        .faq-header p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .faq-lang-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .faq-lang-btn {
+            padding: 10px 24px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .faq-lang-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .faq-lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(199, 49, 156, 0.2);
+        }
+
+        body.theme-dark .faq-lang-btn {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        body.theme-dark .faq-lang-btn.active {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .faq-item {
+            margin-bottom: 12px;
+        }
+
+        .faq-question-btn {
+            width: 100%;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, var(--card-light) 0%, var(--card) 100%);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--foreground);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .faq-question-btn:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--card) 0%, var(--card-light) 100%);
+            box-shadow: 0 8px 20px rgba(199, 49, 156, 0.12);
+            transform: translateX(4px);
+        }
+
+        .faq-question-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 12px 28px rgba(199, 49, 156, 0.22);
+        }
+
+        body.theme-dark .faq-question-btn {
+            background: linear-gradient(135deg, var(--card) 0%, var(--surface-soft) 100%);
+        }
+
+        body.theme-dark .faq-question-btn:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 8px 20px rgba(201, 56, 152, 0.15);
+        }
+
+        body.theme-dark .faq-question-btn.active {
+            background: linear-gradient(135deg, var(--secondary) 0%, #a03a7f 100%);
+            color: #ffffff;
+            border-color: var(--secondary);
+        }
+
+        .faq-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-question-btn.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+
+        .faq-answer-wrapper.open {
+            max-height: 800px;
+        }
+
+        .faq-answer {
+            padding: 24px;
+            background: var(--surface-soft);
+            color: var(--foreground);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            border-radius: 0 0 14px 14px;
+            border-left: 4px solid var(--primary);
+        }
+
+        body.theme-dark .faq-answer {
+            background: var(--card);
+            border-left-color: var(--secondary);
+        }
+
+        .faq-answer strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        body.theme-dark .faq-answer strong {
+            color: var(--secondary);
+        }
+
+        .faq-answer p {
+            margin: 0 0 12px;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+
+        .faq-cta-section {
+            margin-top: 80px;
+            padding: 60px 30px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.theme-dark .faq-cta-section {
+            background: linear-gradient(180deg, #7d1d67 0%, #613d47 100%);
+        }
+
+        .faq-cta-section h2 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin: 0 0 15px;
+        }
+
+        .faq-cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin: 0 0 25px;
+        }
+
+        .faq-cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .faq-cta-btn {
+            padding: 12px 32px;
+            border: 2px solid #ffffff;
+            background: transparent;
+            color: #ffffff;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .faq-cta-btn.primary {
+            background: #ffffff;
+            color: var(--primary);
+        }
+
+        .faq-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .faq-header {
+                padding: 60px 20px 45px;
+                margin-top: 60px;
+            }
+
+            .faq-header h1 {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+
+            .faq-container {
+                padding: 40px 16px;
+            }
+
+            .faq-question-btn {
+                padding: 16px 18px;
+                font-size: 0.95rem;
+            }
+
+            .faq-answer {
+                padding: 18px;
+                font-size: 0.9rem;
+            }
+
+            .faq-cta-section {
+                padding: 40px 20px;
+                margin-top: 60px;
+            }
+
+            .faq-cta-section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+
+            .faq-cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .faq-cta-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq-header {
+                padding: 50px 15px 35px;
+                margin-top: 50px;
+            }
+
+            .faq-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .faq-container {
+                padding: 30px 12px;
+            }
+
+            .faq-lang-toggle {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 30px;
+            }
+
+            .faq-lang-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+
+            .faq-question-btn {
+                padding: 14px 14px;
+                font-size: 0.9rem;
+                gap: 12px;
+            }
+
+            .faq-answer {
+                padding: 14px;
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="../../index.html" aria-label="Mie Newmind">
+                <img class="brand-logo" src="../../assets/logo/logo.png" alt="Mie Newmind" />
+            </a>
+            <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+            <nav class="main-nav" id="main-nav">
+                <a href="about.html">About Us</a>
+                <a href="menu.html">Menu</a>
+                <a href="location.html">Lokasi</a>
+                <a href="reservation.html">Reservasi</a>
+                <a href="franchise.html">Franchise</a>
+                <a href="karir.html">Karir</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="lang-pill" type="button" aria-label="Ganti bahasa">EN</button>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">◐</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <header class="faq-header">
+            <div class="faq-header-content">
+                <h1>Tanya Jawab</h1>
+                <p>Temukan jawaban atas pertanyaan umum tentang Mie Newmind</p>
+            </div>
+        </header>
+
+        <div class="faq-container">
+            <div class="faq-lang-toggle">
+                <button class="faq-lang-btn active" data-lang="id">Bahasa Indonesia</button>
+                <button class="faq-lang-btn" data-lang="en">English</button>
+            </div>
+
+            <section class="faq-content-id">
+                <ol class="faq-list">
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Apa yang membuat Mie Newmind berbeda dari mie pedas lainnya di Madiun?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Mie Newmind menawarkan mie pedas modern dengan rasa khas, tempat aesthetic, dan suasana nyaman di Madiun.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Level pedas mana yang paling favorit di Mie Newmind?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Level pedas 2, 3</strong> menjadi favorit karena seimbang antara rasa gurih dan sensasi pedas.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Menu apa yang direkomendasikan untuk first timer?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Kami merekomendasikan paket <strong>Signature Bundle</strong> yang terdiri dari:</p>
+                                <ul>
+                                    <li><strong>Mie Bupati</strong> (Level 1-8)</li>
+                                    <li><strong>Dimsum</strong> - Udang Keju</li>
+                                    <li><strong>Minuman</strong> - Es teh, es lurah</li>
+                        </div>
+                    </li>
+                </ol>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Kenapa Mie Newmind sering viral di media sosial?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Mie Newmind viral karena tampilan makanan menarik dan konsep tempat yang aesthetic, serta harga yang terjangkau</p>
+                        </div>
+                    </li>
+                </ol>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Apakah Mie Newmind cocok untuk nongkrong bersama teman?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Sangat cocok!</strong> Mie Newmind cocok untuk nongkrong karena tempatnya nyaman dan modern.</p>
+                        </div>
+                    </li>
+                </ol> 
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Apakah rasa mie tetap enak saat dipesan online?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Tentu saja!</strong> Rasa mie tetap lezat saat dipesan online karena kualitas tetap dijaga.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Apa konsep utama dari brand Mie Newmind?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Konsep kami adalah <strong>Rasanya Tidak Korupsi</strong> Mie Newmind menghadirkan rasa autentik tanpa mengurangi kualitas, dipadukan dengan konsep modern aesthetic yang nyaman.</p>
+                                </div>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="faq-content-en" style="display: none;">
+                <ol class="faq-list">
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>What makes Mie Newmind different from other spicy noodles?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Mie Newmind offers modern spicy noodles with signature flavors and an aesthetic atmosphere in Madiun</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Which spice level is most popular?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Spice levels 2 and 3</strong> are the most popular because they offer a balanced savory flavor and spicy sensation.</p>
+                            </div>
+                        </div>
+                    </li>
+                                
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>What menu do you recommend for first-time visitors?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>We recommend the <strong>Signature Bundle</strong> package which includes:</p>
+                                <ul>
+                                    <li><strong>Mie Bupati</strong> (Level 1-8)</li>
+                                    <li><strong>Dimsum</strong> - Shrimp Cheese</li>
+                                    <li><strong>Drinks</strong> - Iced Tea, Es Lurah</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Why does Mie Newmind often go viral on social media?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Mie Newmind goes viral because of its attractive food presentation, aesthetic atmosphere, and affordable prices.</p>
+                                
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Is Mie Newmind suitable for hangouts with friends?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Absolutely!</strong> Mie Newmind is perfect for hanging out thanks to its cozy and modern atmosphere.</p>
+                                
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>Does the noodle taste remain good when ordered online?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p><strong>Of course!</strong> The noodles still taste delicious for online delivery because the quality is consistently maintained.</p>
+                                
+
+                    <li class="faq-item">
+                        <button class="faq-question-btn">
+                            <span>What is the main concept of Mie Newmind brand?</span>
+                            <span class="faq-icon">🔽</span>
+                        </button>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>Our concept is <strong>"Authentic Flavor Without Compromise"</strong>. Mie Newmind delivers authentic flavors without compromising quality, combined with a cozy modern aesthetic atmosphere.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="faq-cta-section">
+                <div class="faq-cta-content">
+                    <h2>Masih Ada Pertanyaan?</h2>
+                    <p>Hubungi kami melalui WhatsApp atau kunjungi media sosial kami</p>
+                    <div class="faq-cta-buttons">
+                        <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer" class="faq-cta-btn">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer" class="faq-cta-btn primary">
+                            <i class="bi bi-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="../../assets/logo/logo.png" alt="Mie Newmind" class="footer-logo">
+                <p class="footer-description">Mie pedas kekinian dengan harga yang ramah di kantong. Hadir untuk menemani setiap momen makanmu.</p>
+                <div class="socials">
+                    <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer" class="social-ig"><i class="bi bi-instagram"></i></a>
+                    <a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer" class="social-tiktok"><i class="bi bi-tiktok"></i></a>
+                    <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer" class="social-wa"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://gofood.link/a/MVgE9r3" target="_blank" rel="noreferrer" class="social-gojek"><img src="../../assets/logo/gojek.png" alt="GOJEK" /></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>BROWSE</h4>
+                <a href="about.html">About Us</a>
+                <a href="menu.html">Menu</a>
+                <a href="location.html">Lokasi</a>
+                <a href="reservation.html">Reservasi</a>
+                <a href="franchise.html">Franchise</a>
+                <a href="karir.html">Karir</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>KONTAK</h4>
+                <div class="footer-contact-item">
+                    <p class="footer-label">WHATSAPP</p>
+                    <a href="https://wa.me/6285604030473" target="_blank" rel="noreferrer">085604030473</a>
+                </div>
+                <div class="footer-contact-item">
+                    <p class="footer-label">INSTAGRAM</p>
+                    <a href="https://instagram.com/mienewmind" target="_blank" rel="noreferrer">@mienewmind</a>
+                </div>
+                <div class="footer-contact-item">
+                    <p class="footer-label">TIKTOK</p>
+                    <a href="https://tiktok.com/@mienewmind" target="_blank" rel="noreferrer">@mienewmind</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>ALAMAT</h4>
+                <p class="footer-address">Jl. Garon Raya, Candi, Bagi, Kec. Madiun, Kabupaten Madiun, Jawa Timur 63451</p>
+                <div class="footer-hours">
+                    <p class="footer-label">JAM OPERASIONAL</p>
+                    <p class="footer-time">Senin - Jum'at: 09.00 - 22.00 WIB</p>
+                    <p class="footer-time">Sabtu - Minggu: 09.00 - 23.00 WIB</p>
+                    <p class="footer-status"><span class="status-dot"></span>Buka</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 Mie Newmind. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            const buttons = document.querySelectorAll('.faq-question-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isActive = this.classList.contains('active');
+                    buttons.forEach(b => {
+                        b.classList.remove('active');
+                        b.nextElementSibling.classList.remove('open');
+                    });
+                    if (!isActive) {
+                        this.classList.add('active');
+                        this.nextElementSibling.classList.add('open');
+                    }
+                });
+            });
+
+            // Language Toggle
+            const langBtns = document.querySelectorAll('.faq-lang-btn');
+            const idContent = document.querySelector('.faq-content-id');
+            const enContent = document.querySelector('.faq-content-en');
+            
+            const savedLang = localStorage.getItem('mie-lang') || 'id';
+            if (savedLang === 'en') {
+                langBtns[1].classList.add('active');
+                idContent.style.display = 'none';
+                enContent.style.display = 'block';
+            }
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    localStorage.setItem('mie-lang', lang);
+                    
+                    if (lang === 'id') {
+                        idContent.style.display = 'block';
+                        enContent.style.display = 'none';
+                    } else {
+                        idContent.style.display = 'none';
+                        enContent.style.display = 'block';
+                    }
+                    
+                    buttons.forEach(b => {
+                        b.classList.remove('active');
+                        b.nextElementSibling.classList.remove('open');
+                    });
+                });
+            });
+
+            // Set FAQ as active in nav
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes('faq.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
